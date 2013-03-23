@@ -1,4 +1,4 @@
-OSELAS.Toolchain() Revision Policy                             rsc, 20070211-1
+STLinux.Toolchain() Revision Policy                             rsc, 20070211-1
 ------------------------------------------------------------------------------
 
 Changes allowed in micro releases (x.y.Z): 

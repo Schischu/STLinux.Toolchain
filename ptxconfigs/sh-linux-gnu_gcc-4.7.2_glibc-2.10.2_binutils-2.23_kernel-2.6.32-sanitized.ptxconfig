@@ -5,7 +5,7 @@
 PTXCONF__ptxconfig_MAGIC__=y
 PTXCONF_BUILD_TOOLCHAIN=y
 PTXCONF_NO_PLATFORM=y
-PTXCONF_PROJECT="OSELAS.Toolchain-2013.03.1"
+PTXCONF_PROJECT="STLinux.Toolchain-2013.03.1"
 
 #
 # ----------------------------------

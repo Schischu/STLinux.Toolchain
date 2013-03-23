@@ -1,5 +1,5 @@
 version		:= $(shell ./scripts/setlocalversion ./.tarball-version)
-project		:= OSELAS.Toolchain-$(version)
+project		:= STLinux.Toolchain-$(version)
 v		:= v$(version)
 
 all:
