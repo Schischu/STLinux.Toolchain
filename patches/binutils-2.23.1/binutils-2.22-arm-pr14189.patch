@@ -1,0 +1,17 @@
+Index: bfd/elf32-arm.c
+===================================================================
+RCS file: /cvs/src/src/bfd/elf32-arm.c,v
+retrieving revision 1.294
+diff -u -3 -p -r1.294 elf32-arm.c
+--- bfd/elf32-arm.c	28 Jun 2012 16:57:24 -0000	1.294
++++ bfd/elf32-arm.c	29 Jun 2012 13:21:52 -0000
+@@ -12668,7 +12668,8 @@ elf32_arm_check_relocs (bfd *abfd, struc
+ 
+ 	  /* If the symbol is a function that doesn't bind locally,
+ 	     this relocation will need a PLT entry.  */
+-	  root_plt->refcount += 1;
++	  if (root_plt->refcount != -1)
++	    root_plt->refcount += 1;
+ 
+ 	  if (!call_reloc_p)
+ 	    arm_plt->noncall_refcount++;

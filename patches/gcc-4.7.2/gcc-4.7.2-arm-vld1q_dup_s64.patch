@@ -1,0 +1,100 @@
+2012-06-25  Christophe Lyon  <christophe.lyon@st.com>
+
+	* gcc/config/arm/neon.md (UNSPEC_VLD1_DUP): Remove.
+	(neon_vld1_dup): Restrict to VQ operands.
+	(neon_vld1_dupv2di): New, fixes vld1q_dup_s64.
+	* gcc/testsuite/gcc.target/arm/neon-vld1_dupQ.c: New test.
+
+Index: gcc/gcc/config/arm/neon.md
+===================================================================
+--- gcc/gcc/config/arm/neon.md	(revision 2687)
++++ gcc/gcc/config/arm/neon.md	(working copy)
+@@ -41,7 +41,6 @@
+   UNSPEC_VHADD
+   UNSPEC_VHSUB
+   UNSPEC_VLD1
+-  UNSPEC_VLD1_DUP
+   UNSPEC_VLD1_LANE
+   UNSPEC_VLD2
+   UNSPEC_VLD2_DUP
+@@ -4179,8 +4178,7 @@
+ 
+ (define_insn "neon_vld1_dup<mode>"
+   [(set (match_operand:VDX 0 "s_register_operand" "=w")
+-        (unspec:VDX [(match_operand:<V_elem> 1 "neon_struct_operand" "Um")]
+-                    UNSPEC_VLD1_DUP))]
++        (vec_duplicate:VDX (match_operand:<V_elem> 1 "neon_struct_operand" "Um")))]
+   "TARGET_NEON"
+ {
+   if (GET_MODE_NUNITS (<MODE>mode) > 1)
+@@ -4195,20 +4193,30 @@
+ )
+ 
+ (define_insn "neon_vld1_dup<mode>"
+-  [(set (match_operand:VQX 0 "s_register_operand" "=w")
+-        (unspec:VQX [(match_operand:<V_elem> 1 "neon_struct_operand" "Um")]
+-                    UNSPEC_VLD1_DUP))]
++  [(set (match_operand:VQ 0 "s_register_operand" "=w")
++        (vec_duplicate:VQ (match_operand:<V_elem> 1 "neon_struct_operand" "Um")))]
+   "TARGET_NEON"
+ {
+-  if (GET_MODE_NUNITS (<MODE>mode) > 2)
+     return "vld1.<V_sz_elem>\t{%e0[], %f0[]}, %A1";
+-  else
+-    return "vld1.<V_sz_elem>\t%h0, %A1";
+ }
+-  [(set (attr "neon_type")
+-      (if_then_else (gt (const_string "<V_mode_nunits>") (const_string "1"))
+-                    (const_string "neon_vld2_2_regs_vld1_vld2_all_lanes")
+-                    (const_string "neon_vld1_1_2_regs")))]
++  [(set_attr "neon_type" "neon_vld2_2_regs_vld1_vld2_all_lanes")]
++)
++
++(define_insn_and_split "neon_vld1_dupv2di"
++   [(set (match_operand:V2DI 0 "s_register_operand" "=w")
++    (vec_duplicate:V2DI (match_operand:DI 1 "neon_struct_operand" "Um")))]
++   "TARGET_NEON"
++   "#"
++   "&& reload_completed"
++   [(const_int 0)]
++   {
++    rtx tmprtx = gen_lowpart (DImode, operands[0]);
++    emit_insn (gen_neon_vld1_dupdi (tmprtx, operands[1]));
++    emit_move_insn (gen_highpart (DImode, operands[0]), tmprtx );
++    DONE;
++    }
++  [(set_attr "length" "8")
++   (set_attr "neon_type" "neon_vld2_2_regs_vld1_vld2_all_lanes")]
+ )
+ 
+ (define_expand "vec_store_lanes<mode><mode>"
+diff --git a/gcc/testsuite/gcc.target/arm/neon-vld1_dupQ.c b/gcc/testsuite/gcc.target/arm/neon-vld1_dupQ.c
+new file mode 100644
+index 0000000..b5793bf
+--- /dev/null
++++ b/gcc/testsuite/gcc.target/arm/neon-vld1_dupQ.c
+@@ -0,0 +1,24 @@
++/* Test the `vld1q_s64' ARM Neon intrinsic.  */
++
++/* { dg-do run } */
++/* { dg-require-effective-target arm_neon_hw } */
++/* { dg-options "-O0" } */
++/* { dg-add-options arm_neon } */
++
++#include "arm_neon.h"
++#include <stdlib.h>
++
++int main (void)
++{
++  int64x1_t input[2] = {(int64x1_t)0x0123456776543210LL,
++			(int64x1_t)0x89abcdeffedcba90LL};
++  int64x1_t output[2] = {0, 0};
++  int64x2_t var = vld1q_dup_s64(input);
++
++  vst1q_s64(output, var);
++  if (output[0] != (int64x1_t)0x0123456776543210LL)
++    abort();
++  if (output[1] != (int64x1_t)0x0123456776543210LL)
++    abort();
++  return 0;
++}

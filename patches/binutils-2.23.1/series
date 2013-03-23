@@ -1,0 +1,13 @@
+# SH4 patches
+binutils-2.23.1-stm-130201.patch
+
+# ST200 patches
+#binutils-2.21.51-st200-7.03-6-0-0-B-111108.patch
+#binutils-2.21.51-st200-maxpagesize.patch
+
+# ARM Patches
+#binutils-2.22-arm-warn-tag-vfp.patch
+#binutils-2.22-arm-pr14189.patch
+#binutils-2.22-arm-pr14397.patch
+#binutils-2.22-dt-needed.patch
+

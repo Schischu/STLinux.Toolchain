@@ -1,0 +1,1037 @@
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/ChangeLog.stm gcc-linaro-4.7-2013.01-st/ChangeLog.stm
+--- gcc-linaro-4.7-2013.01/ChangeLog.stm	1970-01-01 01:00:00.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/ChangeLog.stm	2013-02-07 16:08:53.563364000 +0100
+@@ -0,0 +1,101 @@
++2013-02-07  Christophe Lyon  <christophe.lyon@st.com>
++	Merge from branches/4.7_devs: rev#3326
++
++	2012-10-11  Laurent Alfonsi  <laurent.alfonsi@st.com>
++
++	* lto-plugin.c (claim_file_handler): Detect no symbol case.
++
++2012-03-30  Christophe Lyon  <christophe.lyon@st.com>
++
++	* configure.ac (CFLAGS_FOR_TARGET, CXXFLAGS_FOR_TARGET): Make sure
++	they contain -O2.
++         * configure: Regenerate.
++
++2012-01-31  Christophe Lyon  <christophe.lyon@st.com>
++
++	* config.gcc (arm*-*-linux*): Default to gnu2 tls.
++
++2012-01-26  Christophe Lyon  <christophe.lyon@st.com>
++	gcc/config/arm:
++	* elf.h (subtarget_extra_asm_spec): Add SUBTARGET_STM_ASM_SPEC.
++	* arm.h (subtarget_asm_spec): Remove.
++	* stm.h: Rename SUBTARGET_ASM_SPEC as
++	SUBTARGET_STM_ASM_SPEC. Forward -mthumb to the assembler.
++
++2011-09-16  Christophe Lyon  <christophe.lyon@st.com>
++	Merge Code Sourcery support for MULTILIB_ALIASES.
++
++	* gcc/doc/fragments.texi, gcc/genmultilib, gcc/Makefile.in,
++	gcc/config/print-sysroot-suffix.sh, gcc/config/t-sysroot-suffix:
++	Add support for MULTILIB_ALIASES.
++
++2011-09-02  Christophe Lyon  <christophe.lyon@st.com>
++	Merge C.Bruel patch for -fcse-sincos.
++
++	* gcc/gcc/tree-ssa-math-opts.c (execute_cse_sincos),
++	gcc/gcc/opts.c, gcc/gcc/common.opt: Add support for -fcse-sincos.
++
++2011-03-03  Christophe Lyon  <christophe.lyon@st.com>
++	* gcc/config/arm/t-arm-elf: Fix OSDIR names for some hardfp and
++	softfp multilibs.
++
++2011-02-22  Christophe Lyon  <christophe.lyon@st.com>
++	* gcc/config/arm/t-arm-elf: Add more Thumb and short-double
++	multilibs.
++
++2010-11-30  Christophe Lyon  <christophe.lyon@st.com>
++	* gcc/config/arm/t-arm-elf: Fix multilib dir names for
++	v7a/short-double and v7a/hardfp/short-double.
++
++2010-11-26  Christophe Lyon  <christophe.lyon@st.com>
++	* gcc/config/arm/arm.h: Add link to SUBTARGET_STM_CPP_SPEC.
++	* gcc/config/arm/stm.h: Add a space before -D_DOUBLE_IS_32BITS.
++
++2010-10-19  Christophe Lyon  <christophe.lyon@st.com>
++	* gcc/config/arm/t-arm-elf: Add -fshort-double multilibs.
++	* gcc/config/arm/stm.h: Add -D_DOUBLE_IS_32BITS to
++	SUBTARGET_CPP_SPEC when -fshort-double is used, as is required by
++	Newlib.
++
++2010-05-26  Christophe Lyon  <christophe.lyon@st.com>
++	* gcc/config/arm/arm.h: Add empty default definitions for
++	SUBTARGET_ASM_SPEC and SUBTARGET_STM_EXTRA_SPECS, needed for the
++	Linux target OS build.
++
++2010-05-06  Christophe Lyon  <christophe.lyon@st.com>
++	* gcc/config/arm/t-arm-elf: Remove v6-m variants from multilib
++	because they are not supported by Newlib/libgloss.
++
++2010-04-20  Christophe Lyon  <christophe.lyon@st.com>
++	* gcc/config/arm/t-arm-elf: Fix multilib builds so that libstdc++
++	ends up in the right places.
++
++2010-03-11  Christophe Lyon  <christophe.lyon@st.com>
++	* Makefile.in: Remove CFLAGS from CFLAGS_FOR_TARGET.
++	* gcc/config/arm/t-arm-elf: Remove armv6-m multilib variant.
++
++2007-11-07  Christophe Lyon  <christophe.lyon@st.com>
++	* gcc/config/arm/stm.h: Define READ_STM_SPECFILES.
++	* gcc/gcc.c: Read spec files as defined by READ_STM_SPECFILES.
++
++2007-10-02  Christophe Lyon  <christophe.lyon@st.com>
++	* gcc/config/arm/elf.h: MULTILIB_DEFAULTS: Add fsigned-bitfields.
++
++2007-09-20  Christophe Lyon  <christophe.lyon@st.com>
++	* gcc/config.gcc: Add arm/stm.h to tm_file.
++	* gcc/config/arm/arm.h: Add %(cppruntime) and %(cppboard) to
++	CPP_SPEC. Add subtarget_link_spec and subtarget_asm_spec to
++	EXTRA_SPECS.
++	* gcc/config/arm/arm.opt: Add mboard and mruntime description.
++	* gcc/config/arm/bpabi.h: Add %(subtarget_link_spec) to LINK_SPEC.
++	* gcc/config/arm/stm.h: New file.
++
++2007-08-28  Christophe Lyon  <christophe.lyon@st.com>
++	* gcc/config/arm/t-arm-elf: Added fshort-wchar and
++	fsigned-bitfields/funsigned-bitfields multilib variants.
++
++2007-06-15  Christophe Lyon  <christophe.lyon@st.com>
++	* gcc/config/arm/arm.c: include "c-common.h".
++	* gcc/config/arm/arm.h: define WCHAR_TYPE_SIZE according to
++	flag_short_wchar.
++
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/configure gcc-linaro-4.7-2013.01-st/configure
+--- gcc-linaro-4.7-2013.01/configure	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/configure	2013-02-05 17:05:35.000000000 +0100
+@@ -6681,7 +6681,7 @@ if test "x$CFLAGS_FOR_TARGET" = x; then
+   esac
+   case " $CFLAGS " in
+     *" -g "* | *" -g3 "*) ;;
+-    *) CFLAGS_FOR_TARGET="-g $CFLAGS" ;;
++    *) CFLAGS_FOR_TARGET="-g $CFLAGS_FOR_TARGET" ;;
+   esac
+ fi
+ 
+@@ -6694,7 +6694,7 @@ if test "x$CXXFLAGS_FOR_TARGET" = x; the
+   esac
+   case " $CXXFLAGS " in
+     *" -g "* | *" -g3 "*) ;;
+-    *) CXXFLAGS_FOR_TARGET="-g $CXXFLAGS" ;;
++    *) CXXFLAGS_FOR_TARGET="-g $CXXFLAGS_FOR_TARGET" ;;
+   esac
+ fi
+ 
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/configure.ac gcc-linaro-4.7-2013.01-st/configure.ac
+--- gcc-linaro-4.7-2013.01/configure.ac	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/configure.ac	2013-02-05 17:05:30.000000000 +0100
+@@ -2139,7 +2139,7 @@ if test "x$CFLAGS_FOR_TARGET" = x; then
+   esac
+   case " $CFLAGS " in
+     *" -g "* | *" -g3 "*) ;;
+-    *) CFLAGS_FOR_TARGET="-g $CFLAGS" ;;
++    *) CFLAGS_FOR_TARGET="-g $CFLAGS_FOR_TARGET" ;;
+   esac
+ fi
+ AC_SUBST(CFLAGS_FOR_TARGET)
+@@ -2152,7 +2152,7 @@ if test "x$CXXFLAGS_FOR_TARGET" = x; the
+   esac
+   case " $CXXFLAGS " in
+     *" -g "* | *" -g3 "*) ;;
+-    *) CXXFLAGS_FOR_TARGET="-g $CXXFLAGS" ;;
++    *) CXXFLAGS_FOR_TARGET="-g $CXXFLAGS_FOR_TARGET" ;;
+   esac
+ fi
+ AC_SUBST(CXXFLAGS_FOR_TARGET)
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/Makefile.in gcc-linaro-4.7-2013.01-st/gcc/Makefile.in
+--- gcc-linaro-4.7-2013.01/gcc/Makefile.in	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/Makefile.in	2013-02-05 17:12:11.000000000 +0100
+@@ -1834,10 +1834,11 @@ s-mlib: $(srcdir)/genmultilib Makefile
+ 	    "$(MULTILIB_EXCLUSIONS)" \
+ 	    "$(MULTILIB_OSDIRNAMES)" \
+ 	    "$(MULTILIB_REQUIRED)" \
++	    "$(MULTILIB_ALIASES)" \
+ 	    "@enable_multilib@" \
+ 	    > tmp-mlib.h; \
+ 	else \
+-	  $(SHELL) $(srcdir)/genmultilib '' '' '' '' '' '' '' '' no\
++	  $(SHELL) $(srcdir)/genmultilib '' '' '' '' '' '' '' '' '' no \
+ 	    > tmp-mlib.h; \
+ 	fi
+ 	$(SHELL) $(srcdir)/../move-if-change tmp-mlib.h multilib.h
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/common.opt gcc-linaro-4.7-2013.01-st/gcc/common.opt
+--- gcc-linaro-4.7-2013.01/gcc/common.opt	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/common.opt	2013-02-05 17:10:45.000000000 +0100
+@@ -1163,6 +1163,10 @@ Common Report Var(flag_gcse_las) Init(0)
+ Perform redundant load after store elimination in global common subexpression
+ elimination
+ 
++fcse-sincos
++Common Report Var(flag_cse_sincos) Optimization
++Enable sincos merging
++
+ fgcse-after-reload
+ Common Report Var(flag_gcse_after_reload) Optimization
+ Perform global common subexpression elimination after register allocation
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/config/arm/arm.h gcc-linaro-4.7-2013.01-st/gcc/config/arm/arm.h
+--- gcc-linaro-4.7-2013.01/gcc/config/arm/arm.h	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/config/arm/arm.h	2013-02-05 17:12:17.000000000 +0100
+@@ -156,6 +156,8 @@ extern void (*arm_lang_output_object_att
+ 
+ #undef  CPP_SPEC
+ #define CPP_SPEC "%(subtarget_cpp_spec)					\
++%(cppruntime)                                                           \
++%(cppboard)                                                             \
+ %{mfloat-abi=soft:%{mfloat-abi=hard:					\
+ 	%e-mfloat-abi=soft and -mfloat-abi=hard may not be used together}} \
+ %{mbig-endian:%{mlittle-endian:						\
+@@ -175,9 +177,11 @@ extern void (*arm_lang_output_object_att
+ 
+    Do not define this macro if it does not need to do anything.  */
+ #define EXTRA_SPECS						\
+-  { "subtarget_cpp_spec",	SUBTARGET_CPP_SPEC },           \
++  { "subtarget_cpp_spec",	SUBTARGET_CPP_SPEC SUBTARGET_STM_CPP_SPEC },           \
+   { "asm_cpu_spec",		ASM_CPU_SPEC },			\
+-  SUBTARGET_EXTRA_SPECS
++  { "subtarget_link_spec",      SUBTARGET_LINK_SPEC },		\
++    SUBTARGET_EXTRA_SPECS                                       \
++    SUBTARGET_STM_EXTRA_SPECS
+ 
+ #ifndef SUBTARGET_EXTRA_SPECS
+ #define SUBTARGET_EXTRA_SPECS
+@@ -187,6 +191,18 @@ extern void (*arm_lang_output_object_att
+ #define SUBTARGET_CPP_SPEC      ""
+ #endif
+ 
++#ifndef SUBTARGET_LINK_SPEC
++#define SUBTARGET_LINK_SPEC      ""
++#endif
++
++#ifndef SUBTARGET_STM_EXTRA_SPECS
++#define SUBTARGET_STM_EXTRA_SPECS
++#endif
++
++#ifndef SUBTARGET_STM_CPP_SPEC
++#define SUBTARGET_STM_CPP_SPEC
++#endif
++
+ /* Run-time Target Specification.  */
+ #define TARGET_SOFT_FLOAT		(arm_float_abi == ARM_FLOAT_ABI_SOFT)
+ /* Use hardware floating point instructions. */
+@@ -603,7 +619,7 @@ extern int arm_arch_thumb_hwdiv;
+ #ifndef WCHAR_TYPE
+ #define WCHAR_TYPE (TARGET_AAPCS_BASED ? "unsigned int" : "int")
+ 
+-#define WCHAR_TYPE_SIZE BITS_PER_WORD
++#define WCHAR_TYPE_SIZE (flag_short_wchar ? SHORT_TYPE_SIZE : BITS_PER_WORD)
+ #endif
+ 
+ /* Sized for fixed-point types.  */
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/config/arm/arm.opt gcc-linaro-4.7-2013.01-st/gcc/config/arm/arm.opt
+--- gcc-linaro-4.7-2013.01/gcc/config/arm/arm.opt	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/config/arm/arm.opt	2013-02-05 17:04:08.000000000 +0100
+@@ -267,3 +267,14 @@ that may trigger Cortex-M3 errata.
+ munaligned-access
+ Target Report Var(unaligned_access) Init(2)
+ Enable unaligned word and halfword accesses to packed data.
++
++;; The -mboard and -mruntime options need only be accepted here, they are
++;; actually processed by supplementary specs files.
++
++mboard=
++Target RejectNegative Joined
++Board name.
++
++mruntime=
++Target RejectNegative Joined
++Runtime name.
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/config/arm/bpabi.h gcc-linaro-4.7-2013.01-st/gcc/config/arm/bpabi.h
+--- gcc-linaro-4.7-2013.01/gcc/config/arm/bpabi.h	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/config/arm/bpabi.h	2013-02-05 17:04:08.000000000 +0100
+@@ -78,7 +78,8 @@
+ #define BPABI_LINK_SPEC \
+   "%{mbig-endian:-EB} %{mlittle-endian:-EL} "		\
+   "%{static:-Bstatic} %{shared:-shared} %{symbolic:-Bsymbolic} "	\
+-  "-X" SUBTARGET_EXTRA_LINK_SPEC TARGET_FIX_V4BX_SPEC BE8_LINK_SPEC
++  "-X %(subtarget_link_spec)" SUBTARGET_EXTRA_LINK_SPEC TARGET_FIX_V4BX_SPEC \
++   BE8_LINK_SPEC
+ 
+ #undef  LINK_SPEC
+ #define LINK_SPEC BPABI_LINK_SPEC
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/config/arm/elf.h gcc-linaro-4.7-2013.01-st/gcc/config/arm/elf.h
+--- gcc-linaro-4.7-2013.01/gcc/config/arm/elf.h	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/config/arm/elf.h	2013-02-05 17:04:08.000000000 +0100
+@@ -35,7 +35,7 @@
+ 
+ #ifndef SUBTARGET_EXTRA_SPECS
+ #define SUBTARGET_EXTRA_SPECS \
+-  { "subtarget_extra_asm_spec",	SUBTARGET_EXTRA_ASM_SPEC }, \
++  { "subtarget_extra_asm_spec",	SUBTARGET_EXTRA_ASM_SPEC SUBTARGET_STM_ASM_SPEC }, \
+   { "subtarget_asm_float_spec", SUBTARGET_ASM_FLOAT_SPEC }, \
+   SUBSUBTARGET_EXTRA_SPECS
+ #endif
+@@ -44,6 +44,10 @@
+ #define SUBTARGET_EXTRA_ASM_SPEC ""
+ #endif
+ 
++#ifndef SUBTARGET_STM_ASM_SPEC
++#define SUBTARGET_STM_ASM_SPEC ""
++#endif
++
+ #ifndef SUBTARGET_ASM_FLOAT_SPEC
+ #define SUBTARGET_ASM_FLOAT_SPEC "\
+ %{mapcs-float:-mfloat}"
+@@ -113,7 +117,7 @@
+ 
+ #ifndef MULTILIB_DEFAULTS
+ #define MULTILIB_DEFAULTS \
+-  { "marm", "mlittle-endian", "mfloat-abi=soft", "mno-thumb-interwork", "fno-leading-underscore" }
++  { "marm", "mlittle-endian", "mfloat-abi=soft", "mno-thumb-interwork", "fno-leading-underscore", "fsigned-bitfields" }
+ #endif
+ 
+ #define TARGET_ASM_FILE_START_APP_OFF true
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/config/arm/nocrt0.h gcc-linaro-4.7-2013.01-st/gcc/config/arm/nocrt0.h
+--- gcc-linaro-4.7-2013.01/gcc/config/arm/nocrt0.h	1970-01-01 01:00:00.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/config/arm/nocrt0.h	2013-02-05 17:04:08.000000000 +0100
+@@ -0,0 +1,25 @@
++/* Definitions for generic libgloss based cofigs where crt0 is supplied by
++   the linker script.
++   Copyright (C) 2006 Free Software Foundation, Inc.
++
++   This file is part of GCC.
++
++   GCC is free software; you can redistribute it and/or modify it
++   under the terms of the GNU General Public License as published
++   by the Free Software Foundation; either version 3, or (at your
++   option) any later version.
++
++   GCC is distributed in the hope that it will be useful, but WITHOUT
++   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
++   or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
++   License for more details.
++
++   You should have received a copy of the GNU General Public License
++   along with GCC; see the file COPYING3.  If not see
++   <http://www.gnu.org/licenses/>.  */
++
++#undef  STARTFILE_SPEC
++#define STARTFILE_SPEC	" crti%O%s crtbegin%O%s"
++
++#undef LIB_SPEC
++#define LIB_SPEC "-lc"
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/config/arm/stm.h gcc-linaro-4.7-2013.01-st/gcc/config/arm/stm.h
+--- gcc-linaro-4.7-2013.01/gcc/config/arm/stm.h	1970-01-01 01:00:00.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/config/arm/stm.h	2013-02-05 17:04:08.000000000 +0100
+@@ -0,0 +1,43 @@
++/* Add the SUBTARGET_LINK_SPEC to add the runtime support */
++#undef SUBTARGET_LINK_SPEC
++#define SUBTARGET_LINK_SPEC "%(ldruntime)"
++
++/* This is used by the link spec if the boardspecs file is not used
++   (for whatever reason).  If the boardspecs file overrides this then
++   an alternative can be used. */
++#undef SUBTARGET_STM_EXTRA_SPECS
++#define SUBTARGET_STM_EXTRA_SPECS \
++{ "asruntime", "" }, \
++{ "asboard", "" }, \
++{ "cppruntime", "" }, \
++{ "cppboard", "" }, \
++{ "cc1runtime", "" }, \
++{ "cc1board", "" }, \
++{ "ldruntime", "" }, \
++{ "ldboard", "" }, \
++{ "libruntime", "" }, \
++{ "libboard", "" }
++
++/* Override the SUBTARGET_STM_CPP_SPEC to add a #define needed by
++   Newlib when compiling with -fshort-double */
++#undef SUBTARGET_STM_CPP_SPEC
++#define SUBTARGET_STM_CPP_SPEC "%{fshort-double: -D_DOUBLE_IS_32BITS}"
++
++/* Override the SUBTARGET_STM_ASM_SPEC to add the runtime and board support */
++#undef SUBTARGET_STM_ASM_SPEC
++#define SUBTARGET_STM_ASM_SPEC "%{mthumb:-mthumb} %(asruntime) %(asboard)"
++
++/* Create the CC1_SPEC to add the runtime and board support */
++#undef CC1_SPEC
++#define CC1_SPEC "%(cc1runtime) %(cc1board)"
++
++#undef CC1PLUS_SPEC
++#define CC1PLUS_SPEC "%(cc1runtime) %(cc1board)"
++
++
++/* Override the LIB_SPEC to add the runtime and board support */
++#undef LIB_SPEC
++#define LIB_SPEC "%(libruntime) %(libboard) %{!mboard=*:-lc %{!T*:-T rdimon-ram.ld}} %{mboard=*:%(ldboard)}"
++
++/* Silently read STM's default specfiles */
++#define READ_STM_SPECFILES "runtimespecs", "boardspecs"
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/config/arm/t-arm-elf gcc-linaro-4.7-2013.01-st/gcc/config/arm/t-arm-elf
+--- gcc-linaro-4.7-2013.01/gcc/config/arm/t-arm-elf	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/config/arm/t-arm-elf	2013-02-05 17:04:08.000000000 +0100
+@@ -17,8 +17,10 @@
+ # along with GCC; see the file COPYING3.  If not see
+ # <http://www.gnu.org/licenses/>.
+ 
+-MULTILIB_OPTIONS     = marm/mthumb
+-MULTILIB_DIRNAMES    = arm thumb
++#MULTILIB_OPTIONS     = marm/mthumb
++#MULTILIB_DIRNAMES    = arm thumb
++MULTILIB_OPTIONS     = mthumb
++MULTILIB_DIRNAMES    = thumb
+ MULTILIB_EXCEPTIONS  = 
+ MULTILIB_MATCHES     =
+ 
+@@ -36,12 +38,331 @@ MULTILIB_MATCHES     =
+ #MULTILIB_MATCHES      += march?armv7=mcpu?cortex-r4
+ #MULTILIB_MATCHES      += march?armv7=mcpu?cortex-m3
+ 
++#MULTILIB_OPTIONS      += march=armv7/march=armv7-a/march=armv5t
++#MULTILIB_DIRNAMES     += v7 v7a v5t
++MULTILIB_OPTIONS      += march=armv7-a
++MULTILIB_DIRNAMES     += v7a
++MULTILIB_MATCHES      += march?armv7-a=march?armv7a
++MULTILIB_MATCHES      += march?armv7=march?armv7r
++MULTILIB_MATCHES      += march?armv7=march?armv7m
++MULTILIB_MATCHES      += march?armv7=march?armv7-r
++MULTILIB_MATCHES      += march?armv7=march?armv7-m
++MULTILIB_MATCHES      += march?armv7-a=mcpu?cortex-a9
++MULTILIB_MATCHES      += march?armv7-a=mcpu?cortex-a8
++MULTILIB_MATCHES      += march?armv7=mcpu?cortex-r4
++MULTILIB_MATCHES      += march?armv7=mcpu?cortex-r4f
++MULTILIB_MATCHES      += march?armv7=mcpu?cortex-m3
++
++MULTILIB_MATCHES      += march?armv5t=march?armv5te
++MULTILIB_MATCHES      += march?armv5t=march?armv6
++MULTILIB_MATCHES      += march?armv5t=march?armv6j
++MULTILIB_MATCHES      += march?armv5t=march?armv6k
++MULTILIB_MATCHES      += march?armv5t=march?armv6z
++MULTILIB_MATCHES      += march?armv5t=march?armv6zk
++MULTILIB_MATCHES      += march?armv5t=march?armv6t2
++MULTILIB_MATCHES      += march?armv5t=march?iwmmxt
++MULTILIB_MATCHES      += march?armv5t=march?iwmmxt2
++MULTILIB_MATCHES      += march?armv5t=mcpu?arm10tdmi
++MULTILIB_MATCHES      += march?armv5t=mcpu?arm1020t
++MULTILIB_MATCHES      += march?armv5t=mcpu?arm9e
++MULTILIB_MATCHES      += march?armv5t=mcpu?arm946e-s
++MULTILIB_MATCHES      += march?armv5t=mcpu?arm966e-s
++MULTILIB_MATCHES      += march?armv5t=mcpu?arm968e-s
++MULTILIB_MATCHES      += march?armv5t=mcpu?arm10e
++MULTILIB_MATCHES      += march?armv5t=mcpu?arm1020e
++MULTILIB_MATCHES      += march?armv5t=mcpu?arm1022e
++MULTILIB_MATCHES      += march?armv5t=mcpu?xscale
++MULTILIB_MATCHES      += march?armv5t=mcpu?iwmmxt
++MULTILIB_MATCHES      += march?armv5t=mcpu?iwmmxt2
++MULTILIB_MATCHES      += march?armv5t=mcpu?marvell-f
++MULTILIB_MATCHES      += march?armv5t=mcpu?arm926ej-s
++MULTILIB_MATCHES      += march?armv5t=mcpu?arm1026ej-s
++MULTILIB_MATCHES      += march?armv5t=mcpu?arm1136j-s
++MULTILIB_MATCHES      += march?armv5t=mcpu?arm1136jf-s
++MULTILIB_MATCHES      += march?armv5t=mcpu?arm1176jz-s
++MULTILIB_MATCHES      += march?armv5t=mcpu?arm1176jzf-s
++MULTILIB_MATCHES      += march?armv5t=mcpu?mpcorenovfp
++MULTILIB_MATCHES      += march?armv5t=mcpu?mpcore
++MULTILIB_MATCHES      += march?armv5t=mcpu?arm1156t2-s
++
++MULTILIB_EXCEPTIONS   += march=armv6-m
++MULTILIB_MATCHES      += march?armv6-m=mcpu?cortex-m1
++MULTILIB_MATCHES      += march?armv6-m=mcpu?cortex-m0
++
++# Floating point variants
++MULTILIB_OPTIONS      += mfloat-abi=softfp/mfloat-abi=hard
++MULTILIB_DIRNAMES     += softfp hardfp
++MULTILIB_MATCHES      += mfloat-abi?hard=mhard-float
++
++MULTILIB_OPTIONS      += mfpu=neon
++MULTILIB_DIRNAMES     += neon
++MULTILIB_EXCEPTIONS   += mfpu=neon*
++MULTILIB_MATCHES      += mfpu?neon=mfpu?neon-fp16
++
++MULTILIB_ALIASES      += mthumb=mthumb/mfpu?neon
++MULTILIB_ALIASES      += mthumb=mthumb/march?armv5t/mfpu?neon
++MULTILIB_ALIASES      += mthumb/march?armv7-a=mthumb/march?armv7-a/mfpu?neon
++#MULTILIB_ALIASES      += mthumb/march?armv7/mfix-cortex-m3-ldrd=mthumb/march?armv7-a/mfpu?neon
++
++# Some ARMv7 variants have ARM mode.  Use the ARM libraries.
++MULTILIB_EXCEPTIONS   += march=armv7 march=armv7/*
++
++#MULTILIB_ALIASES      += mfloat-abi?softfp=march?armv7/mfloat-abi?softfp
++#MULTILIB_ALIASES      += mfloat-abi?softfp=march?armv7/mfloat-abi?softfp/mfpu?neon
++#MULTILIB_ALIASES      += mthumb/march?armv7/mfix-cortex-m3-ldrd=mthumb/march?armv7/mfloat-abi?softfp/mfpu?neon
++#MULTILIB_ALIASES      += mthumb/march?armv7/mfix-cortex-m3-ldrd=mthumb/march?armv7/mfpu?neon
++
++# ARMv7-A is specially useful used with VFPv3 (enabled by NEON). Rest of the cases behaves as ARMv7.
++#MULTILIB_ALIASES      += mthumb/march?armv7/mfix-cortex-m3-ldrd=mthumb/march?armv7-a
++#MULTILIB_ALIASES      += mthumb/march?armv7/mfix-cortex-m3-ldrd=mthumb/march?armv7-a/mfloat-abi?softfp
++#MULTILIB_ALIASES      += mthumb/march?armv7/mfix-cortex-m3-ldrd=mthumb/march?armv7/mfloat-abi?softfp
++#MULTILIB_ALIASES      += march?armv5t=march?armv7-a
++#MULTILIB_ALIASES      += march?armv5t=march?armv7-a/mfloat-abi?softfp
++#MULTILIB_ALIASES      += march?armv5t=march?armv7-a/mfpu?neon
++# While armv5t is not built, we need these (otherwise, handled by aliases)
++#MULTILIB_ALIASES      += march?armv7-a=march?armv7-a/mfloat-abi?softfp
++MULTILIB_ALIASES      += march?armv7-a=march?armv7-a/mfpu?neon
++
++# ARMv5T thumb uses the ARMv5T ARM libraries (with or without VFP).
++MULTILIB_ALIASES      += mthumb=mthumb/march?armv5t
++#MULTILIB_ALIASES      += march?armv5t/mfloat-abi?softfp=mthumb/march?armv5t/mfloat-abi?softfp
++#MULTILIB_ALIASES      += march?armv5t/mfloat-abi?softfp=march?armv5t/mfloat-abi?softfp/mfpu?neon
++#MULTILIB_ALIASES      += march?armv5t/mfloat-abi?softfp=mthumb/march?armv5t/mfloat-abi?softfp/mfpu?neon
++#MULTILIB_ALIASES      += march?armv5t=march?armv5t/mfpu?neon
++
++# Thumb-1 VFP isn't really a meaningful combination.  Use the ARM VFP.
++#[CL] maybe we should take the above comment into account? (it's probably
++#commented because mfloat-abi=softfp* is an exception -- see below)
++#MULTILIB_ALIASES      += mfloat-abi?softfp=mthumb/mfloat-abi?softfp
++
++# The only -mfloat-abi=hard libraries provided are for little-endian
++# v7-A NEON.
++MULTILIB_EXCEPTIONS   += mfloat-abi=hard*
++MULTILIB_EXCEPTIONS   += *march=armv5t*mfloat-abi=hard*
++MULTILIB_EXCEPTIONS   += *march=armv7/*mfloat-abi=hard*
++MULTILIB_EXCEPTIONS   += *march=armv6-m*mfloat-abi=hard*
++MULTILIB_EXCEPTIONS   += mthumb/mfloat-abi=hard*
++#MULTILIB_EXCEPTIONS   += *mfloat-abi=hard # Keep this one to have a default when Neon is not supported
++
++# [CL] Remove softfp in the same cases as hardfp
++MULTILIB_EXCEPTIONS   += mfloat-abi=softfp*
++MULTILIB_EXCEPTIONS   += mthumb/mfloat-abi=softfp*
++#MULTILIB_EXCEPTIONS   += *mfloat-abi=softfp # Keep this one to have a default when Neon is not supported
++
++# FIXME: We need a sane way of doing this.
++# This isn't really a multilib, it's a hack to add an extra option
++# to the v7-m multilib.
++#MULTILIB_OPTIONS      += mfix-cortex-m3-ldrd
++#MULTILIB_DIRNAMES     += broken_ldrd
++
++MULTILIB_EXCEPTIONS   += mfix-cortex-m3-ldrd
++MULTILIB_EXCEPTIONS   += mthumb/mfix-cortex-m3-ldrd*
++MULTILIB_EXCEPTIONS   += *march=armv6-m*mfix-cortex-m3-ldrd*
++MULTILIB_EXCEPTIONS   += *march=armv7-a*mfix-cortex-m3-ldrd*
++MULTILIB_EXCEPTIONS   += *mcpu=*mfix-cortex-m3-ldrd
++MULTILIB_EXCEPTIONS   += *mfloat-abi=softfp*mfix-cortex-m3-ldrd
++MULTILIB_EXCEPTIONS   += *march=armv5t*mfix-cortex-m3-ldrd
++MULTILIB_EXCEPTIONS   += *mfpu=neon*mfix-cortex-m3-ldrd
++
++#MULTILIB_ALIASES      += mthumb/march?armv7/mfix-cortex-m3-ldrd=mthumb/march?armv7
++#MULTILIB_ALIASES      += mthumb/march?armv7/mfix-cortex-m3-ldrd=mthumb/march?armv7-a/mfix-cortex-m3-ldrd
++#MULTILIB_ALIASES      += mthumb/march?armv7/mfix-cortex-m3-ldrd=mthumb/march?armv7/mfpu?neon/mfix-cortex-m3-ldrd
++#MULTILIB_ALIASES      += mthumb/march?armv7/mfix-cortex-m3-ldrd=mthumb/march?armv7-a/mfpu?neon/mfix-cortex-m3-ldrd
++
++# As of at least 4.2, gcc passes the wrong -L options if some multilibs are
++# omitted from MULTILIB_OSDIRNAMES
++MULTILIB_OSDIRNAMES    = mthumb=!thumb
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7=!thumb2
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7/mfix-cortex-m3-ldrd=!thumb2
++MULTILIB_OSDIRNAMES   += mthumb/march.armv6-m=!v6-m
++
++MULTILIB_OSDIRNAMES   += mfloat-abi.softfp=!softfp
++MULTILIB_OSDIRNAMES   += march.armv5t=!armv5t
++MULTILIB_OSDIRNAMES   += march.armv5t/mfloat-abi.softfp=!armv5t-vfp
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7/mfix-cortex-m3-ldrd=!thumb2
++
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.softfp=!v7a/softfp
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.softfp/mfpu.neon=!v7a/softfp-neon
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.hard=!v7a/hardfp
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.hard/mfpu.neon=!v7a/hardfp-neon
++
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a=!thumb2/v7a
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfpu.neon=!thumb2/v7a/neon
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.softfp=!thumb2/v7a/softfp
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.softfp/mfpu.neon=!thumb2/v7a/softfp-neon
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.hard=!thumb2/v7a/hardfp
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.hard/mfpu.neon=!thumb2/v7a/hardfp-neon
++
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7=!thumb2/v7
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7/mfloat-abi.softfp/mfpu.neon=!thumb2/v7/neon
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7/mfloat-abi.softfp=!thumb2/v7/softfp
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7/mfpu.neon=!thumb2/neon
++
++# While armv5t is not built, we need this (otherwise, handled by aliases)
++MULTILIB_OSDIRNAMES   += march.armv7-a=!v7a
++
++MULTILIB_OPTIONS      += fshort-double
++MULTILIB_DIRNAMES     += short-double
++MULTILIB_EXCEPTIONS   += fshort-double*
++MULTILIB_EXCEPTIONS   += mthumb/fshort-double*
++MULTILIB_EXCEPTIONS   += mthumb/mfpu=neon/fshort-double*
++MULTILIB_EXCEPTIONS   += *mfloat-abi=softfp/fshort-double*
++MULTILIB_EXCEPTIONS   += mfloat-abi=softfp*fshort-double*
++MULTILIB_EXCEPTIONS   += *mfloat-abi=hard/fshort-double*
++MULTILIB_EXCEPTIONS   += *march=armv7-a/mfpu=neon/fshort-double*
++MULTILIB_OSDIRNAMES   += march.armv7-a/fshort-double=!v7a/short-double
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.hard/fshort-double=!v7a/hardfp/short-double
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.hard/mfpu.neon/fshort-double=!v7a/hardfp-neon/short-double
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfpu.neon/fshort-double=!v7a/neon/short-double
++
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.softfp/mfpu.neon/fshort-double=!v7a/softfp-neon/short-double
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/fshort-double=!thumb2/v7a/short-double
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.softfp/mfpu.neon/fshort-double=!thumb2/v7a/softfp-neon/short-double
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.hard/mfpu.neon/fshort-double=!thumb2/v7a/hardfp-neon/short-double
++
++
++#MULTILIB_OPTIONS      += fshort-wchar
++#MULTILIB_DIRNAMES     += shortwchar
++MULTILIB_EXCEPTIONS   += march=armv6-m/fshort-wchar*
++
++#MULTILIB_OPTIONS      += funsigned-bitfields
++#MULTILIB_DIRNAMES     += ubfields
++#MULTILIB_MATCHES      += fsigned-bitfields=fno-unsigned-bitfields funsigned-bitfields=fno-signed-bitfields
++MULTILIB_MATCHES      += funsigned-bitfields=fno-signed-bitfields
++#MULTILIB_EXCEPTIONS   += march=armv6-m/fsigned-bitfields*
++MULTILIB_EXCEPTIONS   += march=armv6-m/funsigned-bitfields*
++#MULTILIB_ALIASES      += mthumb/march?armv7/mfix-cortex-m3-ldrd/funsigned-bitfields=mthumb/march?armv7/funsigned-bitfields
++#MULTILIB_ALIASES      += mthumb/march?armv7/mfix-cortex-m3-ldrd/fshort-wchar/funsigned-bitfields=mthumb/march?armv7/fshort-wchar/funsigned-bitfields
++
++MULTILIB_OSDIRNAMES   += fshort-wchar=!shortwchar
++#MULTILIB_OSDIRNAMES   += fsigned-bitfields=!sbfields
++MULTILIB_OSDIRNAMES   += funsigned-bitfields=!ubfields
++
++#MULTILIB_OSDIRNAMES   += fshort-wchar/fsigned-bitfields=!shortwchar
++MULTILIB_OSDIRNAMES   += fshort-wchar/funsigned-bitfields=!shortwchar/ubfields
++
++#MULTILIB_OSDIRNAMES   += mthumb/fsigned-bitfields=!thumb
++MULTILIB_OSDIRNAMES   += mthumb/funsigned-bitfields=!thumb/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/fshort-wchar=!thumb/shortwchar
++#MULTILIB_OSDIRNAMES   += mthumb/fshort-wchar/fsigned-bitfields=!thumb/shortwchar
++MULTILIB_OSDIRNAMES   += mthumb/fshort-wchar/funsigned-bitfields=!thumb/shortwchar/ubfields
++
++#MULTILIB_OSDIRNAMES   += mfix-cortex-m3-ldrd/fshort-wchar/fsigned-bitfields=!broken_ldrd/shortwchar
++MULTILIB_OSDIRNAMES   += mfix-cortex-m3-ldrd/fshort-wchar=!broken_ldrd/shortwchar
++MULTILIB_OSDIRNAMES   += mfix-cortex-m3-ldrd/fshort-wchar/funsigned-bitfields=!broken_ldrd/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mfix-cortex-m3-ldrd/funsigned-bitfields=!broken_ldrd/ubfields
++
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7/fshort-wchar=!thumb2/shortwchar
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7/fshort-wchar/funsigned-bitfields=!thumb2/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7/funsigned-bitfields=!thumb2/ubfields
++
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7/mfix-cortex-m3-ldrd/fshort-wchar=!thumb2/shortwchar
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7/mfix-cortex-m3-ldrd/fshort-wchar/funsigned-bitfields=!thumb2/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7/mfix-cortex-m3-ldrd/funsigned-bitfields=!thumb2/ubfields
++
++MULTILIB_OSDIRNAMES   += mthumb/march.armv6-m/fshort-wchar=!v6-m/shortwchar
++MULTILIB_OSDIRNAMES   += mthumb/march.armv6-m/fshort-wchar/funsigned-bitfields=!v6-m/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/march.armv6-m/funsigned-bitfields=!v6-m/ubfields
++
++MULTILIB_OSDIRNAMES   += mthumb/mfix-cortex-m3-ldrd/fshort-wchar=!thumb2/broken_ldrd/shortwchar
++MULTILIB_OSDIRNAMES   += mthumb/mfix-cortex-m3-ldrd/fshort-wchar/funsigned-bitfields=!thumb2/broken_ldrd/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/mfix-cortex-m3-ldrd/funsigned-bitfields=!thumb2/broken_ldrd/ubfields
++
++
++MULTILIB_OSDIRNAMES   += mfpu.neon/fshort-wchar=!neon/shortwchar
++MULTILIB_OSDIRNAMES   += mfpu.neon/fshort-wchar/funsigned-bitfields=!neon/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mfpu.neon/funsigned-bitfields=!neon/ubfields
++MULTILIB_OSDIRNAMES   += mfpu.neon/mfix-cortex-m3-ldrd/fshort-wchar=!neon/broken_ldrd/shortwchar
++MULTILIB_OSDIRNAMES   += mfpu.neon/mfix-cortex-m3-ldrd/fshort-wchar/funsigned-bitfields=!neon/broken_ldrd/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mfpu.neon/mfix-cortex-m3-ldrd/funsigned-bitfields=!neon/broken_ldrd/ubfields
++
++MULTILIB_OSDIRNAMES   += mfloat-abi.softfp/fshort-wchar=!softfp/shortwchar
++MULTILIB_OSDIRNAMES   += mfloat-abi.softfp/fshort-wchar/funsigned-bitfields=!softfp/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mfloat-abi.softfp/funsigned-bitfields=!softfp/ubfields
++MULTILIB_OSDIRNAMES   += mfloat-abi.softfp/mfix-cortex-m3-ldrd/fshort-wchar=!softfp/broken_ldrd/shortwchar
++MULTILIB_OSDIRNAMES   += mfloat-abi.softfp/mfix-cortex-m3-ldrd/fshort-wchar/funsigned-bitfields=!softfp/broken_ldrd/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mfloat-abi.softfp/mfix-cortex-m3-ldrd/funsigned-bitfields=!softfp/broken_ldrd/ubfields
++
++MULTILIB_OSDIRNAMES   += march.armv7-a/fshort-wchar=!v7a/shortwchar
++MULTILIB_OSDIRNAMES   += march.armv7-a/fshort-wchar/funsigned-bitfields=!v7a/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += march.armv7-a/funsigned-bitfields=!v7a/ubfields
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfix-cortex-m3-ldrd/fshort-wchar=!v7a/shortwchar
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfix-cortex-m3-ldrd/fshort-wchar/funsigned-bitfields=!v7a/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfix-cortex-m3-ldrd/funsigned-bitfields=!v7a/ubfields
++
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfpu.neon/fshort-wchar=!v7a/neon/shortwchar
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfpu.neon/fshort-wchar/funsigned-bitfields=!v7a/neon/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfpu.neon/funsigned-bitfields=!v7a/neon/ubfields
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfpu.neon/mfix-cortex-m3-ldrd/fshort-wchar=!v7a/neon/shortwchar
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfpu.neon/mfix-cortex-m3-ldrd/fshort-wchar/funsigned-bitfields=!v7a/neon/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfpu.neon/mfix-cortex-m3-ldrd/funsigned-bitfields=!v7a/neon/ubfields
++
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.softfp/fshort-wchar=!v7a/softfp/shortwchar
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.softfp/fshort-wchar/funsigned-bitfields=!v7a/softfp/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.softfp/funsigned-bitfields=!v7a/softfp/ubfields
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.softfp/mfix-cortex-m3-ldrd/fshort-wchar=!v7a/softfp/shortwchar
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.softfp/mfix-cortex-m3-ldrd/fshort-wchar/funsigned-bitfields=!v7a/softfp/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.softfp/mfix-cortex-m3-ldrd/funsigned-bitfields=!v7a/softfp/ubfields
++
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.hard/fshort-wchar=!v7a/hardfp/shortwchar
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.hard/fshort-wchar/funsigned-bitfields=!v7a/hardfp/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.hard/funsigned-bitfields=!v7a/hardfp/ubfields
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.hard/mfix-cortex-m3-ldrd/fshort-wchar=!v7a/hardfp/shortwchar
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.hard/mfix-cortex-m3-ldrd/fshort-wchar/funsigned-bitfields=!v7a/hardfp/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += march.armv7-a/mfloat-abi.hard/mfix-cortex-m3-ldrd/funsigned-bitfields=!v7a/hardfp/ubfields
++
++
++MULTILIB_OSDIRNAMES   += mthumb/mfpu.neon/fshort-wchar=!thumb/neon/shortwchar
++MULTILIB_OSDIRNAMES   += mthumb/mfpu.neon/fshort-wchar/funsigned-bitfields=!thumb/neon/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/mfpu.neon/funsigned-bitfields=!thumb/neon/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/mfpu.neon/mfix-cortex-m3-ldrd/fshort-wchar=!thumb/neon/broken_ldrd/shortwchar
++MULTILIB_OSDIRNAMES   += mthumb/mfpu.neon/mfix-cortex-m3-ldrd/fshort-wchar/funsigned-bitfields=!thumb/neon/broken_ldrd/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/mfpu.neon/mfix-cortex-m3-ldrd/funsigned-bitfields=!thumb/neon/broken_ldrd/ubfields
++
++MULTILIB_OSDIRNAMES   += mthumb/mfloat-abi.softfp/fshort-wchar=!thumb/softfp/shortwchar
++MULTILIB_OSDIRNAMES   += mthumb/mfloat-abi.softfp/fshort-wchar/funsigned-bitfields=!thumb/softfp/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/mfloat-abi.softfp/funsigned-bitfields=!thumb/softfp/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/mfloat-abi.softfp/mfix-cortex-m3-ldrd/fshort-wchar=!thumb/softfp/broken_ldrd/shortwchar
++MULTILIB_OSDIRNAMES   += mthumb/mfloat-abi.softfp/mfix-cortex-m3-ldrd/fshort-wchar/funsigned-bitfields=!thumb/softfp/broken_ldrd/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/mfloat-abi.softfp/mfix-cortex-m3-ldrd/funsigned-bitfields=!thumb/softfp/broken_ldrd/ubfields
++
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/fshort-wchar=!thumb2/v7a/shortwchar
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/fshort-wchar/funsigned-bitfields=!thumb2/v7a/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/funsigned-bitfields=!thumb2/v7a/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfix-cortex-m3-ldrd/fshort-wchar=!thumb2/v7a/shortwchar
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfix-cortex-m3-ldrd/fshort-wchar/funsigned-bitfields=!thumb2/v7a/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfix-cortex-m3-ldrd/funsigned-bitfields=!thumb2/v7a/ubfields
++
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfpu.neon/fshort-wchar=!thumb2/v7a/neon/shortwchar
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfpu.neon/fshort-wchar/funsigned-bitfields=!thumb2/v7a/neon/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfpu.neon/funsigned-bitfields=!thumb2/v7a/neon/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfpu.neon/mfix-cortex-m3-ldrd/fshort-wchar=!thumb2/v7a/neon/shortwchar
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfpu.neon/mfix-cortex-m3-ldrd/fshort-wchar/funsigned-bitfields=!thumb2/v7a/neon/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfpu.neon/mfix-cortex-m3-ldrd/funsigned-bitfields=!thumb2/v7a/neon/ubfields
++
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.softfp/fshort-wchar=!thumb2/v7a/softfp/shortwchar
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.softfp/fshort-wchar/funsigned-bitfields=!thumb2/v7a/softfp/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.softfp/funsigned-bitfields=!thumb2/v7a/softfp/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.softfp/mfix-cortex-m3-ldrd/fshort-wchar=!thumb2/v7a/softfp/shortwchar
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.softfp/mfix-cortex-m3-ldrd/fshort-wchar/funsigned-bitfields=!thumb2/v7a/softfp/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.softfp/mfix-cortex-m3-ldrd/funsigned-bitfields=!thumb2/v7a/softfp/ubfields
++
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.hard/fshort-wchar=!thumb2/v7a/hardfp/shortwchar
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.hard/fshort-wchar/funsigned-bitfields=!thumb2/v7a/hardfp/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.hard/funsigned-bitfields=!thumb2/v7a/hardfp/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.hard/mfix-cortex-m3-ldrd/fshort-wchar=!thumb2/v7a/hardfp/shortwchar
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.hard/mfix-cortex-m3-ldrd/fshort-wchar/funsigned-bitfields=!thumb2/v7a/hardfp/shortwchar/ubfields
++MULTILIB_OSDIRNAMES   += mthumb/march.armv7-a/mfloat-abi.hard/mfix-cortex-m3-ldrd/funsigned-bitfields=!thumb2/v7a/hardfp/ubfields
++
++# Currently newlib/libgloss does not support -mthumb -march=armv5t
++MULTILIB_EXCEPTIONS   += *mthumb*march=armv5t*
++
+ # Not quite true.  We can support hard-vfp calling in Thumb2, but how do we
+ # express that here?  Also, we really need architecture v5e or later
+ # (mcrr etc).
+-MULTILIB_OPTIONS       += mfloat-abi=hard
+-MULTILIB_DIRNAMES      += fpu
+-MULTILIB_EXCEPTIONS    += *mthumb/*mfloat-abi=hard*
++#MULTILIB_OPTIONS       += mfloat-abi=hard
++#MULTILIB_DIRNAMES      += fpu
++#MULTILIB_EXCEPTIONS    += *mthumb/*mfloat-abi=hard*
+ #MULTILIB_EXCEPTIONS    += *mcpu=fa526/*mfloat-abi=hard*
+ #MULTILIB_EXCEPTIONS    += *mcpu=fa626/*mfloat-abi=hard*
+ 
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/config/arm/t-linux-eabi gcc-linaro-4.7-2013.01-st/gcc/config/arm/t-linux-eabi
+--- gcc-linaro-4.7-2013.01/gcc/config/arm/t-linux-eabi	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/config/arm/t-linux-eabi	2013-02-05 17:04:08.000000000 +0100
+@@ -20,6 +20,11 @@
+ # CLEAR_INSN_CACHE in linux-gas.h does not work in Thumb mode.
+ MULTILIB_OPTIONS	=
+ MULTILIB_DIRNAMES	=
++MULTILIB_EXCEPTIONS	=
++MULTILIB_MATCHES	=
++MULTILIB_OSDIRNAMES	=
++MULTILIB_ALIASES	=
++
+ 
+ #MULTILIB_OPTIONS     += mcpu=fa606te/mcpu=fa626te/mcpu=fmp626/mcpu=fa726te
+ #MULTILIB_DIRNAMES    += fa606te fa626te fmp626 fa726te
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/config/print-sysroot-suffix.sh gcc-linaro-4.7-2013.01-st/gcc/config/print-sysroot-suffix.sh
+--- gcc-linaro-4.7-2013.01/gcc/config/print-sysroot-suffix.sh	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/config/print-sysroot-suffix.sh	2013-02-05 17:04:09.000000000 +0100
+@@ -1,6 +1,7 @@
+ #! /bin/sh
+ # Script to generate SYSROOT_SUFFIX_SPEC equivalent to MULTILIB_OSDIRNAMES
+-# Arguments are MULTILIB_OSDIRNAMES, MULTILIB_OPTIONS and MULTILIB_MATCHES.
++# Arguments are MULTILIB_OSDIRNAMES, MULTILIB_OPTIONS, MULTILIB_MATCHES
++# and MULTILIB_ALIASES.
+ 
+ # Copyright (C) 2009 Free Software Foundation, Inc.
+ 
+@@ -54,6 +55,7 @@ set -e
+ dirnames="$1"
+ options="$2"
+ matches="$3"
++aliases="$4"
+ 
+ cat > print-sysroot-suffix3.sh <<\EOF
+ #! /bin/sh
+@@ -80,7 +82,14 @@ shift 2
+ n="\" \\
+ $padding\""
+ if [ $# = 0 ]; then
++  case $optstring in
+ EOF
++for x in $aliases; do
++  l=`echo $x | sed -e 's/=.*$//' -e 's/?/=/g'`
++  r=`echo $x | sed -e 's/^.*=//' -e 's/?/=/g'`
++  echo "/$r/) optstring=\"/$l/\" ;;" >> print-sysroot-suffix2.sh
++done
++echo "  esac" >> print-sysroot-suffix2.sh
+ 
+ pat=
+ for x in $dirnames; do
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/config/t-sysroot-suffix gcc-linaro-4.7-2013.01-st/gcc/config/t-sysroot-suffix
+--- gcc-linaro-4.7-2013.01/gcc/config/t-sysroot-suffix	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/config/t-sysroot-suffix	2013-02-05 17:04:09.000000000 +0100
+@@ -3,5 +3,5 @@
+ sysroot-suffix.h: $(srcdir)/config/print-sysroot-suffix.sh
+ 	$(SHELL) $(srcdir)/config/print-sysroot-suffix.sh \
+ 	  "$(MULTILIB_OSDIRNAMES)" "$(MULTILIB_OPTIONS)" \
+-	  "$(MULTILIB_MATCHES)" > tmp-sysroot-suffix.h
++	  "$(MULTILIB_MATCHES)" "$(MULTILIB_ALIASES)" > tmp-sysroot-suffix.h
+ 	mv tmp-sysroot-suffix.h $@
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/config.gcc gcc-linaro-4.7-2013.01-st/gcc/config.gcc
+--- gcc-linaro-4.7-2013.01/gcc/config.gcc	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/config.gcc	2013-02-05 17:10:46.000000000 +0100
+@@ -903,7 +903,7 @@ arm*-*-linux*)			# ARM GNU/Linux with EL
+ 	    tmake_file="$tmake_file arm/t-linux"
+ 	    ;;
+ 	esac
+-	with_tls=${with_tls:-gnu}
++	with_tls=${with_tls:-gnu2}
+ 	tm_file="$tm_file arm/aout.h arm/arm.h"
+ 	;;
+ arm*-*-uclinux*)		# ARM ucLinux
+@@ -937,6 +937,7 @@ arm*-*-eabi* | arm*-*-symbianelf* | arm*
+ 	case ${target} in
+ 	arm*-*-eabi*)
+ 	  tm_file="$tm_file newlib-stdint.h"
++	  tm_file="${tm_file} arm/nocrt0.h"
+ 	  tmake_file="${tmake_file} arm/t-bpabi"
+ 	  use_gcc_stdint=wrap
+ 	  ;;
+@@ -951,7 +952,7 @@ arm*-*-eabi* | arm*-*-symbianelf* | arm*
+ 	  tmake_file="${tmake_file} arm/t-symbian"
+ 	  ;;
+ 	esac
+-	tm_file="${tm_file} arm/aout.h arm/arm.h"
++	tm_file="${tm_file} arm/aout.h arm/arm.h arm/stm.h"
+ 	;;
+ arm*-*-rtems*)
+ 	tm_file="dbxelf.h elfos.h arm/unknown-elf.h arm/elf.h arm/aout.h arm/arm.h arm/rtems-elf.h rtems.h newlib-stdint.h"
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/doc/fragments.texi gcc-linaro-4.7-2013.01-st/gcc/doc/fragments.texi
+--- gcc-linaro-4.7-2013.01/gcc/doc/fragments.texi	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/doc/fragments.texi	2013-02-05 17:06:17.000000000 +0100
+@@ -121,6 +121,22 @@ options enabled.  Therefore @code{MULTIL
+ *mthumb/*mhard-float*
+ @end smallexample
+ 
++@findex MULTILIB_ALIASES
++@item MULTILIB_ALIASES
++Sometimes it is desirable to support a large set of multilib options, but
++only build libraries for a subset of those multilibs.  The remaining
++combinations use a sutiable alternative multilb.  In that case, set
++@code{MULTILIB_ALIASES} to a list of the form @samp{realname=aliasname}.
++
++For example, consider a little-endian ARM toolchain with big-endian and
++Thumb multilibs.  If a big-endian Thumb multilib is not wanted, then
++setting @code{MULTILIB_ALIASES} to @samp{mbig-endian=mbig-endian/mthumb} 
++makes this combination use the big-endian ARM libraries instead.
++
++If the multilib is instead excluded by setting @code{MULTILIB_EXCEPTIONS}
++then big-endian Thumb code uses the default multilib as none of the
++remaining multilibs match.
++
+ @findex MULTILIB_REQUIRED
+ @item MULTILIB_REQUIRED
+ Sometimes when there are only a few combinations are required, it would
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/gcc.c gcc-linaro-4.7-2013.01-st/gcc/gcc.c
+--- gcc-linaro-4.7-2013.01/gcc/gcc.c	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/gcc.c	2013-02-05 17:04:09.000000000 +0100
+@@ -6383,6 +6383,23 @@ main (int argc, char **argv)
+ 			      PREFIX_PRIORITY_LAST, 0, 1);
+     }
+ 
++#ifdef READ_STM_SPECFILES
++    {
++      char *filename;
++      char* shortfilename[] = {READ_STM_SPECFILES, NULL};
++      int i;
++
++      for (i=0; shortfilename[i]; i++)
++	{
++	  filename = find_a_file (&startfile_prefixes, shortfilename[i],
++				  R_OK, 0);
++	  if (filename) {
++	    read_specs (filename, FALSE);
++	  }
++	}
++    }
++#endif
++
+   /* Process any user specified specs in the order given on the command
+      line.  */
+   for (uptr = user_specs_head; uptr; uptr = uptr->next)
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/genmultilib gcc-linaro-4.7-2013.01-st/gcc/genmultilib
+--- gcc-linaro-4.7-2013.01/gcc/genmultilib	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/genmultilib	2013-02-08 11:57:31.260456000 +0100
+@@ -84,6 +84,20 @@
+ # This argument can be used together with MULTILIB_EXCEPTIONS and will take
+ # effect after the MULTILIB_EXCEPTIONS.
+ 
++# The optional ninth option is a list of multilib aliases.  This takes the
++# same form as the third argument.  It specifies that the second multilib is
++# a synonym for the first.  This allows a suitable multilib to be selected
++# for all option combinations while only building a subset of all possible
++# multilibs.
++# For example:
++#   genmultilib "mbig-endian mthumb" "eb thumb" "" "" "" "" "" "" \
++#		"mbig-endian=mbig-endian/mthumb" yes
++# This produces:
++#   ". !mbig-endian !mthumb;",
++#   "be mbig-endian !mthumb;",
++#   "be mbig-endian mthumb;",
++#   "thumb !mbig-endian mthumb;",
++
+ # The last option should be "yes" if multilibs are enabled.  If it is not
+ # "yes", all GCC multilib dir names will be ".".
+ 
+@@ -104,7 +118,7 @@
+ #   genmultilib 'm64/m32 mno-app-regs|mcmodel=medany' '64 32 alt'
+ #		'mcmodel?medany=mcmodel?medmid' 'm32/mno-app-regs* m32/mcmodel=*'
+ #		'' 'm32/!m64/mno-app-regs m32/!m64/mcmodel=medany'
+-#		'../lib64 ../lib32 alt' '' yes
++#		'../lib64 ../lib32 alt' '' '' yes
+ # This produces:
+ #   ". !m64 !m32 !mno-app-regs !mcmodel=medany;",
+ #   "64:../lib64 m64 !m32 !mno-app-regs !mcmodel=medany;",
+@@ -133,7 +147,8 @@ extra=$5
+ exclusions=$6
+ osdirnames=$7
+ multilib_required=$8
+-enable_multilib=$9
++aliases=$9
++enable_multilib=${10}
+ 
+ echo "static const char *const multilib_raw[] = {"
+ 
+@@ -141,6 +156,23 @@ mkdir tmpmultilib.$$ || exit 1
+ # Use cd ./foo to avoid CDPATH output.
+ cd ./tmpmultilib.$$ || exit 1
+ 
++# Handle aliases
++cat >tmpmultilib3 <<\EOF
++#!/bin/sh
++# Output a list of aliases (including the original name) for a multilib.
++
++echo $1
++EOF
++for a in ${aliases}; do
++  l=`echo $a | sed -e 's/=.*$//' -e 's/?/=/g'`
++  r=`echo $a | sed -e 's/^.*=//' -e 's/?/=/g'`
++  echo "[ \$1 == /$l/ ] && echo /$r/" >>tmpmultilib3
++  
++  # Also add the alias to the exclusion list
++  exceptions="${exceptions} $r"
++done
++chmod +x tmpmultilib3
++
+ # What we want to do is select all combinations of the sets in
+ # options.  Each combination which includes a set of mutually
+ # exclusive options must then be output multiple times, once for each
+@@ -234,6 +266,21 @@ EOF
+ 
+ fi
+ 
++# Check that all the aliases actually exist
++for a in ${aliases}; do
++  l=`echo $a | sed -e 's/=.*$//' -e 's/?/=/g'`
++  for c in ${combinations}; do
++    if [ "/$l/" = "$c" ]; then
++      l=""
++      break;
++    fi
++  done
++  if [ -n "$l" ] ;then
++    echo "Missing multilib $l for alias $a" 1>&2
++    exit 1
++  fi
++done
++
+ # Construct a sed pattern which will convert option names to directory
+ # names.
+ todirnames=
+@@ -382,23 +429,25 @@ for combo in ${combinations}; do
+     fi
+   fi
+ 
+-  # Look through the options.  We must output each option that is
+-  # present, and negate each option that is not present.
+-  optout=
+-  for set in ${options}; do
+-    setopts=`echo ${set} | sed -e 's_[/|]_ _g'`
+-    for opt in ${setopts}; do
+-      if expr "${combo} " : ".*/${opt}/.*" > /dev/null; then
+-	optout="${optout} ${opt}"
+-      else
+-	optout="${optout} !${opt}"
+-      fi
++  for optcombo in `./tmpmultilib3 ${combo}`; do
++    # Look through the options.  We must output each option that is
++    # present, and negate each option that is not present.
++    optout=
++    for set in ${options}; do
++      setopts=`echo ${set} | sed -e 's_[/|]_ _g'`
++      for opt in ${setopts}; do
++	if expr "${optcombo} " : ".*/${opt}/.*" > /dev/null; then
++	  optout="${optout} ${opt}"
++	else
++	  optout="${optout} !${opt}"
++	fi
++      done
+     done
+-  done
+-  optout=`echo ${optout} | sed -e 's/^ //'`
++    optout=`echo ${optout} | sed -e 's/^ //'`
+ 
+-  # Output the line with all appropriate matches.
+-  dirout="${dirout}" optout="${optout}" ./tmpmultilib2
++    # Output the line with all appropriate matches.
++    dirout="${dirout}" optout="${optout}" ./tmpmultilib2
++  done
+ done
+ 
+ # Terminate the list of string.
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/opts.c gcc-linaro-4.7-2013.01-st/gcc/opts.c
+--- gcc-linaro-4.7-2013.01/gcc/opts.c	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/opts.c	2013-02-05 17:10:23.000000000 +0100
+@@ -459,6 +459,7 @@ static const struct default_options defa
+     { OPT_LEVELS_2_PLUS, OPT_fcrossjumping, NULL, 1 },
+     { OPT_LEVELS_2_PLUS, OPT_foptimize_sibling_calls, NULL, 1 },
+     { OPT_LEVELS_2_PLUS, OPT_fcse_follow_jumps, NULL, 1 },
++    { OPT_LEVELS_2_PLUS, OPT_fcse_sincos, NULL, 1 },
+     { OPT_LEVELS_2_PLUS, OPT_fgcse, NULL, 1 },
+     { OPT_LEVELS_2_PLUS, OPT_fexpensive_optimizations, NULL, 1 },
+     { OPT_LEVELS_2_PLUS, OPT_frerun_cse_after_loop, NULL, 1 },
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/gcc/tree-ssa-math-opts.c gcc-linaro-4.7-2013.01-st/gcc/tree-ssa-math-opts.c
+--- gcc-linaro-4.7-2013.01/gcc/tree-ssa-math-opts.c	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/gcc/tree-ssa-math-opts.c	2013-02-05 17:10:20.000000000 +0100
+@@ -1417,7 +1417,8 @@ execute_cse_sincos (void)
+ 		CASE_FLT_FN (BUILT_IN_SIN):
+ 		CASE_FLT_FN (BUILT_IN_CEXPI):
+ 		  /* Make sure we have either sincos or cexp.  */
+-		  if (!TARGET_HAS_SINCOS && !TARGET_C99_FUNCTIONS)
++		  if (!TARGET_HAS_SINCOS && !TARGET_C99_FUNCTIONS
++                      && flag_cse_sincos)
+ 		    break;
+ 
+ 		  arg = gimple_call_arg (stmt, 0);
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/lto-plugin/ChangeLog.STM gcc-linaro-4.7-2013.01-st/lto-plugin/ChangeLog.STM
+--- gcc-linaro-4.7-2013.01/lto-plugin/ChangeLog.STM	1970-01-01 01:00:00.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/lto-plugin/ChangeLog.STM	2013-02-07 16:07:29.823902000 +0100
+@@ -0,0 +1,3 @@
++2012-10-11  Laurent Alfonsi  <laurent.alfonsi@st.com>
++
++	* lto-plugin.c (claim_file_handler): Detect no symbol case.
+diff -rNup '--exclude=.svn' gcc-linaro-4.7-2013.01/lto-plugin/lto-plugin.c gcc-linaro-4.7-2013.01-st/lto-plugin/lto-plugin.c
+--- gcc-linaro-4.7-2013.01/lto-plugin/lto-plugin.c	2013-01-15 13:58:45.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st/lto-plugin/lto-plugin.c	2013-02-07 16:07:29.900903000 +0100
+@@ -910,6 +910,9 @@ claim_file_handler (const struct ld_plug
+ 
+   status = add_symbols (file->handle, lto_file.symtab.nsyms,
+ 			lto_file.symtab.syms);
++  if (status == LDPS_NO_SYMS)
++    goto cleanup;
++    
+   check (status == LDPS_OK, LDPL_FATAL, "could not add symbols");
+ 
+   *claimed = 1;

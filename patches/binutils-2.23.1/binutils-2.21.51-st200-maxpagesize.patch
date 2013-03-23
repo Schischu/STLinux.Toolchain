@@ -1,0 +1,11 @@
+--- binutils-2.21.51/bfd/elf32-lx-linux.c~	2011-10-31 12:17:06.000000000 +0000
++++ binutils-2.21.51/bfd/elf32-lx-linux.c	2011-11-22 18:03:52.000000000 +0000
+@@ -28,7 +28,7 @@
+ #define ELF_ARCH			bfd_arch_lx
+ #define ELF_MACHINE_CODE		EM_LX
+ #define ELF_MACHINE_ALT1		EM_LX_OLD
+-#define ELF_MAXPAGESIZE			0x100000
++#define ELF_MAXPAGESIZE			0x2000
+ #define ELF_COMMONPAGESIZE              0x2000
+ #define LINUX_ABI			1
+ #define NO_COMPRESSION_SUPPORT          1

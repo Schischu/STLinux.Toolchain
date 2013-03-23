@@ -1,0 +1,234 @@
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/BASE-VER gcc-linaro-4.7-2013.01-st.svn/gcc/BASE-VER
+--- gcc-linaro-4.7-2013.01-st/gcc/BASE-VER	2013-02-05 17:10:27.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/BASE-VER	2013-02-12 18:32:44.000000000 +0100
+@@ -1 +1 @@
+-4.7.3
++4.7.2
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/aot-compile.1 gcc-linaro-4.7-2013.01-st.svn/gcc/doc/aot-compile.1
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/aot-compile.1	2013-02-05 17:06:20.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/aot-compile.1	2013-02-13 13:39:54.000000000 +0100
+@@ -124,7 +124,7 @@
+ .\" ========================================================================
+ .\"
+ .IX Title "AOT-COMPILE 1"
+-.TH AOT-COMPILE 1 "2013-01-02" "gcc-4.7.3" "GNU"
++.TH AOT-COMPILE 1 "2013-01-02" "gcc-4.7.2" "GNU"
+ .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\" way too many mistakes in technical documents.
+ .if n .ad l
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/cpp.1 gcc-linaro-4.7-2013.01-st.svn/gcc/doc/cpp.1
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/cpp.1	2013-02-05 17:06:20.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/cpp.1	2013-02-13 13:39:27.000000000 +0100
+@@ -124,7 +124,7 @@
+ .\" ========================================================================
+ .\"
+ .IX Title "CPP 1"
+-.TH CPP 1 "2013-01-02" "gcc-4.7.3" "GNU"
++.TH CPP 1 "2013-01-02" "gcc-4.7.2" "GNU"
+ .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\" way too many mistakes in technical documents.
+ .if n .ad l
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/fsf-funding.7 gcc-linaro-4.7-2013.01-st.svn/gcc/doc/fsf-funding.7
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/fsf-funding.7	2013-02-05 17:06:17.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/fsf-funding.7	2013-02-13 13:40:52.000000000 +0100
+@@ -124,7 +124,7 @@
+ .\" ========================================================================
+ .\"
+ .IX Title "FSF-FUNDING 7"
+-.TH FSF-FUNDING 7 "2013-01-02" "gcc-4.7.3" "GNU"
++.TH FSF-FUNDING 7 "2013-01-02" "gcc-4.7.2" "GNU"
+ .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\" way too many mistakes in technical documents.
+ .if n .ad l
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/g++.1 gcc-linaro-4.7-2013.01-st.svn/gcc/doc/g++.1
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/g++.1	2013-02-05 17:06:19.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/g++.1	2013-02-13 13:40:56.000000000 +0100
+@@ -124,7 +124,7 @@
+ .\" ========================================================================
+ .\"
+ .IX Title "GCC 1"
+-.TH GCC 1 "2013-01-02" "gcc-4.7.3" "GNU"
++.TH GCC 1 "2013-01-02" "gcc-4.7.2" "GNU"
+ .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\" way too many mistakes in technical documents.
+ .if n .ad l
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/gc-analyze.1 gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gc-analyze.1
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/gc-analyze.1	2013-02-05 17:05:37.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gc-analyze.1	2013-02-13 13:39:11.000000000 +0100
+@@ -124,7 +124,7 @@
+ .\" ========================================================================
+ .\"
+ .IX Title "GC-ANALYZE 1"
+-.TH GC-ANALYZE 1 "2013-01-02" "gcc-4.7.3" "GNU"
++.TH GC-ANALYZE 1 "2013-01-02" "gcc-4.7.2" "GNU"
+ .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\" way too many mistakes in technical documents.
+ .if n .ad l
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/gcc.1 gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gcc.1
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/gcc.1	2013-02-05 17:06:18.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gcc.1	2013-02-13 13:40:48.000000000 +0100
+@@ -124,7 +124,7 @@
+ .\" ========================================================================
+ .\"
+ .IX Title "GCC 1"
+-.TH GCC 1 "2013-01-02" "gcc-4.7.3" "GNU"
++.TH GCC 1 "2013-01-02" "gcc-4.7.2" "GNU"
+ .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\" way too many mistakes in technical documents.
+ .if n .ad l
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/gcc.info gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gcc.info
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/gcc.info	2013-02-05 17:06:21.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gcc.info	2013-02-13 13:39:46.000000000 +0100
+@@ -61,7 +61,7 @@ Introduction
+ 
+ This manual documents how to use the GNU compilers, as well as their
+ features and incompatibilities, and how to report bugs.  It corresponds
+-to the compilers (Linaro GCC 4.7-2013.01) version 4.7.3.  The internals
++to the compilers (Linaro GCC 4.7-2013.01) version 4.7.2.  The internals
+ of the GNU compilers, including how to port them to new targets and
+ some information about how to write front ends for new languages, are
+ documented in a separate manual.  *Note Introduction: (gccint)Top.
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/gccint.info gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gccint.info
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/gccint.info	2013-02-05 17:06:22.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gccint.info	2013-02-13 13:38:41.000000000 +0100
+@@ -61,7 +61,7 @@ Introduction
+ This manual documents the internals of the GNU compilers, including how
+ to port them to new targets and some information about how to write
+ front ends for new languages.  It corresponds to the compilers
+-(Linaro GCC 4.7-2013.01) version 4.7.3.  The use of the GNU compilers
++(Linaro GCC 4.7-2013.01) version 4.7.2.  The use of the GNU compilers
+ is documented in a separate manual.  *Note Introduction: (gcc)Top.
+ 
+  This manual is mainly a reference manual rather than a tutorial.  It
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/gcj-dbtool.1 gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gcj-dbtool.1
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/gcj-dbtool.1	2013-02-05 17:06:19.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gcj-dbtool.1	2013-02-13 13:41:01.000000000 +0100
+@@ -124,7 +124,7 @@
+ .\" ========================================================================
+ .\"
+ .IX Title "GCJ-DBTOOL 1"
+-.TH GCJ-DBTOOL 1 "2013-01-02" "gcc-4.7.3" "GNU"
++.TH GCJ-DBTOOL 1 "2013-01-02" "gcc-4.7.2" "GNU"
+ .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\" way too many mistakes in technical documents.
+ .if n .ad l
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/gcj.1 gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gcj.1
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/gcj.1	2013-02-05 17:06:22.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gcj.1	2013-02-13 13:40:03.000000000 +0100
+@@ -124,7 +124,7 @@
+ .\" ========================================================================
+ .\"
+ .IX Title "GCJ 1"
+-.TH GCJ 1 "2013-01-02" "gcc-4.7.3" "GNU"
++.TH GCJ 1 "2013-01-02" "gcc-4.7.2" "GNU"
+ .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\" way too many mistakes in technical documents.
+ .if n .ad l
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/gcov.1 gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gcov.1
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/gcov.1	2013-02-05 17:06:19.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gcov.1	2013-02-13 13:39:50.000000000 +0100
+@@ -124,7 +124,7 @@
+ .\" ========================================================================
+ .\"
+ .IX Title "GCOV 1"
+-.TH GCOV 1 "2013-01-02" "gcc-4.7.3" "GNU"
++.TH GCOV 1 "2013-01-02" "gcc-4.7.2" "GNU"
+ .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\" way too many mistakes in technical documents.
+ .if n .ad l
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/gfdl.7 gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gfdl.7
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/gfdl.7	2013-02-05 17:06:17.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gfdl.7	2013-02-13 13:39:36.000000000 +0100
+@@ -124,7 +124,7 @@
+ .\" ========================================================================
+ .\"
+ .IX Title "GFDL 7"
+-.TH GFDL 7 "2013-01-02" "gcc-4.7.3" "GNU"
++.TH GFDL 7 "2013-01-02" "gcc-4.7.2" "GNU"
+ .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\" way too many mistakes in technical documents.
+ .if n .ad l
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/gfortran.1 gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gfortran.1
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/gfortran.1	2013-02-05 17:06:20.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gfortran.1	2013-02-13 13:39:17.000000000 +0100
+@@ -124,7 +124,7 @@
+ .\" ========================================================================
+ .\"
+ .IX Title "GFORTRAN 1"
+-.TH GFORTRAN 1 "2013-01-02" "gcc-4.7.3" "GNU"
++.TH GFORTRAN 1 "2013-01-02" "gcc-4.7.2" "GNU"
+ .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\" way too many mistakes in technical documents.
+ .if n .ad l
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/gij.1 gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gij.1
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/gij.1	2013-02-05 17:06:19.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gij.1	2013-02-13 13:39:22.000000000 +0100
+@@ -124,7 +124,7 @@
+ .\" ========================================================================
+ .\"
+ .IX Title "GIJ 1"
+-.TH GIJ 1 "2013-01-02" "gcc-4.7.3" "GNU"
++.TH GIJ 1 "2013-01-02" "gcc-4.7.2" "GNU"
+ .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\" way too many mistakes in technical documents.
+ .if n .ad l
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/gpl.7 gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gpl.7
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/gpl.7	2013-02-05 17:06:21.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/gpl.7	2013-02-13 13:40:09.000000000 +0100
+@@ -124,7 +124,7 @@
+ .\" ========================================================================
+ .\"
+ .IX Title "GPL 7"
+-.TH GPL 7 "2013-01-02" "gcc-4.7.3" "GNU"
++.TH GPL 7 "2013-01-02" "gcc-4.7.2" "GNU"
+ .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\" way too many mistakes in technical documents.
+ .if n .ad l
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/grmic.1 gcc-linaro-4.7-2013.01-st.svn/gcc/doc/grmic.1
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/grmic.1	2013-02-05 17:06:20.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/grmic.1	2013-02-13 13:39:40.000000000 +0100
+@@ -124,7 +124,7 @@
+ .\" ========================================================================
+ .\"
+ .IX Title "GRMIC 1"
+-.TH GRMIC 1 "2013-01-02" "gcc-4.7.3" "GNU"
++.TH GRMIC 1 "2013-01-02" "gcc-4.7.2" "GNU"
+ .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\" way too many mistakes in technical documents.
+ .if n .ad l
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/jcf-dump.1 gcc-linaro-4.7-2013.01-st.svn/gcc/doc/jcf-dump.1
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/jcf-dump.1	2013-02-05 17:06:20.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/jcf-dump.1	2013-02-13 13:40:00.000000000 +0100
+@@ -124,7 +124,7 @@
+ .\" ========================================================================
+ .\"
+ .IX Title "JCF-DUMP 1"
+-.TH JCF-DUMP 1 "2013-01-02" "gcc-4.7.3" "GNU"
++.TH JCF-DUMP 1 "2013-01-02" "gcc-4.7.2" "GNU"
+ .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\" way too many mistakes in technical documents.
+ .if n .ad l
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/jv-convert.1 gcc-linaro-4.7-2013.01-st.svn/gcc/doc/jv-convert.1
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/jv-convert.1	2013-02-05 17:06:18.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/jv-convert.1	2013-02-13 13:39:31.000000000 +0100
+@@ -124,7 +124,7 @@
+ .\" ========================================================================
+ .\"
+ .IX Title "JV-CONVERT 1"
+-.TH JV-CONVERT 1 "2013-01-02" "gcc-4.7.3" "GNU"
++.TH JV-CONVERT 1 "2013-01-02" "gcc-4.7.2" "GNU"
+ .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\" way too many mistakes in technical documents.
+ .if n .ad l
+diff -rNup gcc-linaro-4.7-2013.01-st/gcc/doc/rebuild-gcj-db.1 gcc-linaro-4.7-2013.01-st.svn/gcc/doc/rebuild-gcj-db.1
+--- gcc-linaro-4.7-2013.01-st/gcc/doc/rebuild-gcj-db.1	2013-02-05 17:06:17.000000000 +0100
++++ gcc-linaro-4.7-2013.01-st.svn/gcc/doc/rebuild-gcj-db.1	2013-02-13 13:38:51.000000000 +0100
+@@ -124,7 +124,7 @@
+ .\" ========================================================================
+ .\"
+ .IX Title "REBUILD-GCJ-DB 1"
+-.TH REBUILD-GCJ-DB 1 "2013-01-02" "gcc-4.7.3" "GNU"
++.TH REBUILD-GCJ-DB 1 "2013-01-02" "gcc-4.7.2" "GNU"
+ .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
+ .\" way too many mistakes in technical documents.
+ .if n .ad l

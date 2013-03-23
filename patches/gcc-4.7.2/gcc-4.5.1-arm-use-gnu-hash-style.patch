@@ -1,0 +1,15 @@
+Configure gcc to use gnu-hash style by default since now on.
+
+Signed-off-by: Carmelo Amoroso <carmelo.amoroso@st.com>
+Acked-by: Christophe Lyon <christophe.lyon@st.com>
+
+--- gcc-4.5.1/gcc/config/arm/linux-elf.h.orig	2011-09-01 15:48:49.000000000 +0200
++++ gcc-4.5.1/gcc/config/arm/linux-elf.h	2011-09-01 15:50:48.000000000 +0200
+@@ -72,6 +72,7 @@
+    %{rdynamic:-export-dynamic} \
+    %{!dynamic-linker:-dynamic-linker " LINUX_DYNAMIC_LINKER "} \
+    -X \
++   %{!static:--hash-style=gnu} \
+    %{mbig-endian:-EB} %{mlittle-endian:-EL}" \
+    SUBTARGET_EXTRA_LINK_SPEC
+ 
