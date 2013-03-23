@@ -185,12 +185,11 @@ $(STATEDIR)/cross-gcc.install:
 		rm -v $${la_file}; \
 	done
 
-	ln -sfv libgcc.a `$(CROSS_GCC_PREFIX)/bin/$(PTXCONF_GNU_TARGET)-gcc \
-		-print-libgcc-file-name | \
-		sed 's/libgcc/&_eh/'`
-	ln -sfv libgcc.a `$(CROSS_GCC_PREFIX)/bin/$(PTXCONF_GNU_TARGET)-gcc \
-		-print-libgcc-file-name | \
-		sed 's/libgcc/&_s/'`
+	ln -sfv $(SYSROOT)/../lib/gcc/sh4-linux-gnu/$(CROSS_GCC_VERSION)/libgcc.a \
+		$(SYSROOT)/../lib/gcc/sh4-linux-gnu/$(CROSS_GCC_VERSION)/libgcc_eh.a 
+
+	ln -sfv $(SYSROOT)/../lib/gcc/sh4-linux-gnu/$(CROSS_GCC_VERSION)/libgcc.a \
+		$(SYSROOT)/../lib/gcc/sh4-linux-gnu/$(CROSS_GCC_VERSION)/libgcc_s.a 
 
 	@$(call touch)
 
