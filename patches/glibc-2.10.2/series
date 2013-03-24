@@ -16,3 +16,4 @@
 #0020-revert-sunrpc-removal.patch
 #0021-fix-libdl-crash.patch
 0022-fix-stackpointer.patch
+glibc-avoid-libgcc_eh-and-libgcc_s.patch

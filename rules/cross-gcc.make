@@ -77,9 +77,6 @@ CROSS_GCC_AUTOCONF_COMMON := \
 	$(PTXCONF_CROSS_GCC_CONFIG_LTO) \
 	\
 	$(PTXCONF_CROSS_GCC_CONFIG_NLS) \
-	--disable-decimal-float \
-	--disable-fixed-point \
-	--disable-win32-registry \
 	\
 	--enable-symvers=gnu \
 	\
@@ -87,9 +84,9 @@ CROSS_GCC_AUTOCONF_COMMON := \
 	--enable-threads=$(PTXCONF_CROSS_GCC_THREADS) \
 	--with-system-zlib
 
-#ifdef PTXCONF_HOST_MPCX2
-#CROSS_GCC_AUTOCONF_COMMON += --with-mpcx2=$(PTXCONF_SYSROOT_HOST)
-#endif
+ifdef PTXCONF_HOST_MPCX2
+CROSS_GCC_AUTOCONF_COMMON += --with-mpcx2=$(PTXCONF_SYSROOT_HOST)
+endif
 
 ifdef PTXCONF_HOST_GMP
 CROSS_GCC_AUTOCONF_COMMON += --with-gmp=$(PTXCONF_SYSROOT_HOST)
@@ -98,10 +95,19 @@ endif
 ifdef PTXCONF_HOST_MPFR
 CROSS_GCC_AUTOCONF_COMMON += --with-mpfr=$(PTXCONF_SYSROOT_HOST)
 endif
+
+ifdef PTXCONF_HOST_LIBELF
+CROSS_GCC_AUTOCONF_COMMON += --with-libelf=$(PTXCONF_SYSROOT_HOST)
+endif
+
+CROSS_GCC_AUTOCONF_COMMON += --without-ppl
 	
 #	--with-gxx-include-dir="\\\${prefix}/target%{_stm_target_include_dir}/c++/%{version}"
 # --without-ppl
 
+#	--disable-decimal-float \
+#	--disable-fixed-point \
+#	--disable-win32-registry \
 
 #
 # language selection
@@ -118,15 +124,16 @@ CROSS_GCC_AUTOCONF := \
 	--enable-languages=$(subst $(space),$(comma),$(CROSS_GCC_LANG-y)) \
 	--enable-c99 \
 	--enable-long-long \
-	--enable-libstdcxx-debug \
-	--enable-profile \
 	\
 	$(PTXCONF_CROSS_GCC_CONFIG_SHARED) \
 	$(PTXCONF_CROSS_GCC_CONFIG_LIBSSP) \
 	$(PTXCONF_CROSS_GCC_CONFIG_LIBGOMP) \
 	$(PTXCONF_CROSS_GCC_CONFIG_LIBITM) \
-	\
-	$(if $(filter 3.%,$(CROSS_GCC_VERSION)),,--enable-checking=release)
+	--disable-checking
+
+#	--enable-libstdcxx-debug
+#	--enable-profile
+#	$(if $(filter 3.%,$(CROSS_GCC_VERSION)),,--enable-checking=release)
 
 $(STATEDIR)/cross-gcc.prepare:
 	@$(call targetinfo)
@@ -185,13 +192,14 @@ $(STATEDIR)/cross-gcc.install:
 		rm -v $${la_file}; \
 	done
 
-	ln -sfv $(SYSROOT)/../lib/gcc/sh4-linux-gnu/$(CROSS_GCC_VERSION)/libgcc.a \
-		$(SYSROOT)/../lib/gcc/sh4-linux-gnu/$(CROSS_GCC_VERSION)/libgcc_eh.a 
-
-	ln -sfv $(SYSROOT)/../lib/gcc/sh4-linux-gnu/$(CROSS_GCC_VERSION)/libgcc.a \
-		$(SYSROOT)/../lib/gcc/sh4-linux-gnu/$(CROSS_GCC_VERSION)/libgcc_s.a 
-
 	@$(call touch)
+
+
+#	ln -sfv $(SYSROOT)/../lib/gcc/$(PTXCONF_GNU_TARGET)/$(CROSS_GCC_VERSION)/libgcc.a \
+#		$(SYSROOT)/../lib/gcc/$(PTXCONF_GNU_TARGET)/$(CROSS_GCC_VERSION)/libgcc_eh.a 
+#
+#	ln -sfv $(SYSROOT)/../lib/gcc/$(PTXCONF_GNU_TARGET)/$(CROSS_GCC_VERSION)/libgcc.a \
+#		$(SYSROOT)/../lib/gcc/$(PTXCONF_GNU_TARGET)/$(CROSS_GCC_VERSION)/libgcc_s.a 
 
 # ----------------------------------------------------------------------------
 # Clean
