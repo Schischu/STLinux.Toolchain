@@ -77,7 +77,7 @@ $(STATEDIR)/cross-gcc-first.prepare:
 $(STATEDIR)/cross-gcc-first.compile:
 	@$(call targetinfo)
 	cd $(CROSS_GCC_FIRST_BUILDDIR) && $(CROSS_GCC_FIRST_PATH) \
-		$(MAKE) $(PARALLELMFLAGS)
+		$(MAKE) $(PARALLELMFLAGS_BROKEN)
 	@$(call touch)
 
 # ----------------------------------------------------------------------------

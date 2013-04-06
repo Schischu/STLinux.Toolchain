@@ -152,7 +152,7 @@ $(STATEDIR)/cross-gcc.compile:
 	@$(call targetinfo)
 	@ln -sf `which $(HOSTCC)` $(PTXCONF_SYSROOT_HOST)/bin/$(GNU_BUILD)-gcc
 	cd $(CROSS_GCC_BUILDDIR) && $(CROSS_GCC_PATH) \
-		$(MAKE) $(PARALLELMFLAGS)
+		$(MAKE) $(PARALLELMFLAGS_BROKEN)
 	@$(call touch)
 
 # ----------------------------------------------------------------------------
@@ -162,7 +162,7 @@ $(STATEDIR)/cross-gcc.compile:
 $(STATEDIR)/cross-gcc.install:
 	@$(call targetinfo)
 	@cd $(CROSS_GCC_BUILDDIR) && \
-		$(CROSS_GCC_PATH) $(MAKE) install
+		$(CROSS_GCC_PATH) $(MAKE) $(PARALLELMFLAGS_BROKEN) install
 
 	@cd "$(PTXCONF_SYSROOT_CROSS)/$(PTX_TOUPLE_TARGET)/lib"; \
 	dst="$(SYSROOT)/usr/lib"; \
