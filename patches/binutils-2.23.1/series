@@ -11,3 +11,6 @@ binutils-2.23.1-stm-130201.patch
 #binutils-2.22-arm-pr14397.patch
 #binutils-2.22-dt-needed.patch
 
+#http://www.mail-archive.com/bug-binutils@gnu.org/msg14429.html
+#texinfo-5.0: bfd.texinfo: unknown command `colophon'
+binutils-2.23.1-FTBFS_with_texinfo_from_experimental.patch
