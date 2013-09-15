@@ -27,7 +27,10 @@ CROSS_GCC_DIR		:= $(BUILDDIR_CROSS_DEBUG)/$(CROSS_GCC)
 CROSS_GCC_BUILDDIR	:= $(CROSS_BUILDDIR)/$(CROSS_GCC)-build
 
 CROSS_GCC_URL	 	:= \
-	http://www.duckbox.de/ptxdist/temporary-src/gcc/$(CROSS_GCC).$(CROSS_GCC_SUFFIX)
+	$(call ptx/mirror, GNU, gcc/$(CROSS_GCC)/$(CROSS_GCC).$(CROSS_GCC_SUFFIX)) \
+	http://www.duckbox.de/ptxdist/temporary-src/gcc/$(CROSS_GCC).$(CROSS_GCC_SUFFIX) \
+	http://ptxdist.sat-universum.de/$(CROSS_GCC).$(CROSS_GCC_SUFFIX)
+	
 
 ptx/abs2rel := $(PTXDIST_WORKSPACE)/scripts/ptxd_abs2rel.sh
 
