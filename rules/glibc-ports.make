@@ -35,8 +35,7 @@ GLIBC_PORTS_DIR		:= $(BUILDDIR)/$(GLIBC_PORTS)
 
 GLIBC_PORTS_URL		:= \
 	$(call ptx/mirror, GNU, glibc/$(GLIBC_PORTS).$(GLIBC_PORTS_SUFFIX)) \
-	ftp://sources.redhat.com/pub/glibc/snapshots/$(GLIBC_PORTS).$(GLIBC_PORTS_SUFFIX) \
-	http://www.pengutronix.de/software/ptxdist/temporary-src/glibc/$(GLIBC_PORTS).$(GLIBC_PORTS_SUFFIX) \
+	http://ptxdist.sat-universum.de/$(GLIBC_PORTS).$(GLIBC_PORTS_SUFFIX) \
 	http://www.duckbox.de/ptxdist/temporary-src/glibc/$(GLIBC_PORTS).$(GLIBC_PORTS_SUFFIX)
 
 # ----------------------------------------------------------------------------

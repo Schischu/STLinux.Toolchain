@@ -1,0 +1,22 @@
+--- glibc-2.10.2/nscd/Makefile.org	2013-03-22 22:35:00.000000000 +0100
++++ glibc-2.10.2/nscd/Makefile	2013-03-22 22:35:49.631130813 +0100
+@@ -92,14 +92,15 @@
+ # _FORTIFY_SOURCE.
+ nscd-cflags = -DIS_IN_nscd=1
+ else
+-nscd-cflags = -DIS_IN_nscd=1 -D_FORTIFY_SOURCE=2
++nscd-cflags = -DIS_IN_nscd=1
++# -D_FORTIFY_SOURCE=2
+ endif
+ ifeq (yesyes,$(have-fpie)$(build-shared))
+ nscd-cflags += $(pie-ccflag)
+ endif
+-ifeq (yes,$(have-ssp))
+-nscd-cflags += -fstack-protector
+-endif
++#ifeq (yes,$(have-ssp))
++#nscd-cflags += -fstack-protector
++#endif
+ 
+ CFLAGS-nscd.c += $(nscd-cflags)
+ CFLAGS-connections.c += $(nscd-cflags)
