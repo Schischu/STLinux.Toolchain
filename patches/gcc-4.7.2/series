@@ -1,32 +1,9 @@
-
 gcc-4.2.4-multilibpath.patch
 
 # SH4 common
 gcc-4.7.2-stm-130218.patch
 gcc-4.7.0-sh-use-gnu-hash-style.patch
 gcc-4.5.2-sysroot.patch
-
-# SH4 uClibc
-#gcc-4.7.0-uclibc-locale.patch
-#gcc-4.2.4-uclibc-missing-execinfo_h.patch
-#gcc-4.2.4-uclibc-snprintf.patch
-#gcc-4.2.4-uclibc-libstdc++-namespace.patch
-#gcc-4.3.4-uclibc-locale_facets.patch
-#gcc-4.7.0-uclibc-libstdc++_no_nls.patch
-#gcc-4.3.4-uclibc-libstdc++_headers.patch
-#gcc-4.3.4-libmudflap-susv3-legacy.patch
-
-# ARM uClibc
-
-# ARM patches
-#gcc-4.6.3-linaro-4.6-2012.03.patch
-#gcc-4.6.2-linaro-4.6-2012.02-st.patch
-#gcc-4.5.1-arm-use-gnu-hash-style.patch
-#gcc-4.6.3-pr52765.patch
-#gcc-4.6.3-pr52868.patch
-#gcc-4.6.3-fix-bugzilla_16032.patch
-#gcc-4.6.3-arm-zero-extend-fix-mini-pool.patch
-#gcc-4.6.3-arm-vld1q_dup_s64.patch
 
 0500-Fix-Argument-list-too-long-error.patch
 
