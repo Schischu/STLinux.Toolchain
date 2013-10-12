@@ -1,0 +1,431 @@
+diff -r 9f04cee4c103 bfd/doc/bfd.texinfo
+--- a/bfd/doc/bfd.texinfo	Wed Jun 12 01:54:49 2013 -0400
++++ b/bfd/doc/bfd.texinfo	Wed Jun 19 13:08:01 2013 -0400
+@@ -322,7 +322,7 @@
+ @printindex cp
+ 
+ @tex
+-% I think something like @colophon should be in texinfo.  In the
++% I think something like @@colophon should be in texinfo.  In the
+ % meantime:
+ \long\def\colophon{\hbox to0pt{}\vfill
+ \centerline{The body of this manual is set in}
+@@ -333,7 +333,7 @@
+ \centerline{{\sl\fontname\tensl\/}}
+ \centerline{are used for emphasis.}\vfill}
+ \page\colophon
+-% Blame: doc@cygnus.com, 28mar91.
++% Blame: doc@@cygnus.com, 28mar91.
+ @end tex
+ 
+ @bye
+diff -r 9f04cee4c103 binutils/doc/binutils.texi
+--- a/binutils/doc/binutils.texi	Wed Jun 12 01:54:49 2013 -0400
++++ b/binutils/doc/binutils.texi	Wed Jun 19 13:08:01 2013 -0400
+@@ -148,18 +148,18 @@
+ * objcopy::			Copy and translate object files
+ * objdump::                     Display information from object files
+ * ranlib::                      Generate index to archive contents
+-* readelf::                     Display the contents of ELF format files
+ * size::                        List section sizes and total size
+ * strings::                     List printable strings from files
+ * strip::                       Discard symbols
+-* elfedit::                     Update the ELF header of ELF files
+ * c++filt::			Filter to demangle encoded C++ symbols
+ * cxxfilt: c++filt.             MS-DOS name for c++filt
+ * addr2line::			Convert addresses to file and line
+ * nlmconv::                     Converts object code into an NLM
+-* windres::			Manipulate Windows resources
+ * windmc::			Generator for Windows message resources
++* windres::			Manipulate Windows resources
+ * dlltool::			Create files needed to build and use DLLs
++* readelf::                     Display the contents of ELF format files
++* elfedit::                     Update the ELF header of ELF files
+ * Common Options::              Command-line options for all utilities
+ * Selecting the Target System:: How these utilities determine the target
+ * Reporting Bugs::              Reporting Bugs
+@@ -2936,7 +2936,7 @@
+ @c man end
+ @end ignore
+ 
+-@node c++filt, addr2line, elfedit, Top
++@node c++filt, addr2line, strip, Top
+ @chapter c++filt
+ 
+ @kindex c++filt
+@@ -4413,7 +4413,7 @@
+ 
+ @table @env
+ 
+-@itemx --input-mach=@var{machine}
++@item --input-mach=@var{machine}
+ Set the matching input ELF machine type to @var{machine}.  If
+ @option{--input-mach} isn't specified, it will match any ELF
+ machine types.
+@@ -4421,21 +4421,21 @@
+ The supported ELF machine types are, @var{L1OM}, @var{K1OM} and
+ @var{x86-64}.
+ 
+-@itemx --output-mach=@var{machine}
++@item --output-mach=@var{machine}
+ Change the ELF machine type in the ELF header to @var{machine}.  The
+ supported ELF machine types are the same as @option{--input-mach}.
+ 
+-@itemx --input-type=@var{type}
++@item --input-type=@var{type}
+ Set the matching input ELF file type to @var{type}.  If
+ @option{--input-type} isn't specified, it will match any ELF file types.
+ 
+ The supported ELF file types are, @var{rel}, @var{exec} and @var{dyn}.
+ 
+-@itemx --output-type=@var{type}
++@item --output-type=@var{type}
+ Change the ELF file type in the ELF header to @var{type}.  The
+ supported ELF types are the same as @option{--input-type}.
+ 
+-@itemx --input-osabi=@var{osabi}
++@item --input-osabi=@var{osabi}
+ Set the matching input ELF file OSABI to @var{osabi}.  If
+ @option{--input-osabi} isn't specified, it will match any ELF OSABIs.
+ 
+@@ -4445,7 +4445,7 @@
+ @var{FreeBSD}, @var{TRU64}, @var{Modesto}, @var{OpenBSD}, @var{OpenVMS},
+ @var{NSK}, @var{AROS} and @var{FenixOS}.
+ 
+-@itemx --output-osabi=@var{osabi}
++@item --output-osabi=@var{osabi}
+ Change the ELF OSABI in the ELF header to @var{osabi}.  The
+ supported ELF OSABI are the same as @option{--input-osabi}.
+ 
+diff -r 9f04cee4c103 gas/doc/c-arc.texi
+--- a/gas/doc/c-arc.texi	Wed Jun 12 01:54:49 2013 -0400
++++ b/gas/doc/c-arc.texi	Wed Jun 19 13:08:01 2013 -0400
+@@ -220,7 +220,7 @@
+ encodings for use of these instructions according to the specification
+ by the user.  The parameters are:
+ 
+-@table @bullet
++@table @code
+ @item @var{name}
+ Name of the extension instruction 
+ 
+diff -r 9f04cee4c103 gas/doc/c-arm.texi
+--- a/gas/doc/c-arm.texi	Wed Jun 12 01:54:49 2013 -0400
++++ b/gas/doc/c-arm.texi	Wed Jun 19 13:08:01 2013 -0400
+@@ -1,5 +1,4 @@
+-@c Copyright 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
+-@c 2006, 2007, 2008, 2009, 2010, 2011  Free Software Foundation, Inc.
++@c Copyright 1996-2013 Free Software Foundation, Inc.
+ @c This is part of the GAS manual.
+ @c For copying conditions, see the file as.texinfo.
+ 
+@@ -388,29 +387,29 @@
+ @code{unified} syntax, which can be selected via the @code{.syntax}
+ directive, and has the following main features:
+ 
+-@table @bullet
+-@item
++@table @code
++@item 1
+ Immediate operands do not require a @code{#} prefix.
+ 
+-@item
++@item 2
+ The @code{IT} instruction may appear, and if it does it is validated
+ against subsequent conditional affixes.  In ARM mode it does not
+ generate machine code, in THUMB mode it does.
+ 
+-@item
++@item 3
+ For ARM instructions the conditional affixes always appear at the end
+ of the instruction.  For THUMB instructions conditional affixes can be
+ used, but only inside the scope of an @code{IT} instruction.
+ 
+-@item
++@item 4
+ All of the instructions new to the V6T2 architecture (and later) are
+ available.  (Only a few such instructions can be written in the
+ @code{divided} syntax).
+ 
+-@item
++@item 5
+ The @code{.N} and @code{.W} suffixes are recognized and honored.
+ 
+-@item
++@item 6
+ All instructions set the flags if and only if they have an @code{s}
+ affix.
+ @end table
+@@ -449,28 +448,6 @@
+ @cindex register names, ARM
+ *TODO* Explain about ARM register naming, and the predefined names.
+ 
+-@node ARM-Neon-Alignment
+-@subsection NEON Alignment Specifiers
+-
+-@cindex alignment for NEON instructions
+-Some NEON load/store instructions allow an optional address
+-alignment qualifier.
+-The ARM documentation specifies that this is indicated by
+-@samp{@@ @var{align}}. However GAS already interprets
+-the @samp{@@} character as a "line comment" start,
+-so @samp{: @var{align}} is used instead.  For example:
+-
+-@smallexample
+-        vld1.8 @{q0@}, [r0, :128]
+-@end smallexample
+-
+-@node ARM Floating Point
+-@section Floating Point
+-
+-@cindex floating point, ARM (@sc{ieee})
+-@cindex ARM floating point (@sc{ieee})
+-The ARM family uses @sc{ieee} floating-point numbers.
+-
+ @node ARM-Relocations
+ @subsection ARM relocation generation
+ 
+@@ -517,6 +494,28 @@
+         MOVT r0, #:upper16:foo
+ @end smallexample
+ 
++@node ARM-Neon-Alignment
++@subsection NEON Alignment Specifiers
++
++@cindex alignment for NEON instructions
++Some NEON load/store instructions allow an optional address
++alignment qualifier.
++The ARM documentation specifies that this is indicated by
++@samp{@@ @var{align}}. However GAS already interprets
++the @samp{@@} character as a "line comment" start,
++so @samp{: @var{align}} is used instead.  For example:
++
++@smallexample
++        vld1.8 @{q0@}, [r0, :128]
++@end smallexample
++
++@node ARM Floating Point
++@section Floating Point
++
++@cindex floating point, ARM (@sc{ieee})
++@cindex ARM floating point (@sc{ieee})
++The ARM family uses @sc{ieee} floating-point numbers.
++
+ @node ARM Directives
+ @section ARM Machine Directives
+ 
+diff -r 9f04cee4c103 gas/doc/c-cr16.texi
+--- a/gas/doc/c-cr16.texi	Wed Jun 12 01:54:49 2013 -0400
++++ b/gas/doc/c-cr16.texi	Wed Jun 19 13:08:01 2013 -0400
+@@ -1,4 +1,4 @@
+-@c Copyright 2007, 2008, 2011 Free Software Foundation, Inc.
++@c Copyright 2007-2013 Free Software Foundation, Inc.
+ @c This is part of the GAS manual.
+ @c For copying conditions, see the file as.texinfo.
+ 
+@@ -44,26 +44,33 @@
+ CR16 target operand qualifiers and its size (in bits):
+ 
+ @table @samp
+-@item Immediate Operand
+-- s ---- 4 bits
+-@item 
+-- m ---- 16 bits, for movb and movw instructions.
+-@item 
+-- m ---- 20 bits, movd instructions.
+-@item 
+-- l ---- 32 bits
++@item Immediate Operand: s
++4 bits.
+ 
+-@item Absolute Operand
+-- s ---- Illegal specifier for this operand.
+-@item  
+-- m ---- 20 bits, movd instructions.
++@item Immediate Operand: m
++16 bits, for movb and movw instructions.
+ 
+-@item Displacement Operand
+-- s ---- 8 bits
+-@item
+-- m ---- 16 bits
+-@item 
+-- l ---- 24 bits
++@item Immediate Operand: m
++20 bits, movd instructions.
++
++@item Immediate Operand: l
++32 bits.
++
++@item Absolute Operand: s
++Illegal specifier for this operand.
++
++@item Absolute Operand: m
++20 bits, movd instructions.
++
++@item Displacement Operand: s
++8 bits.
++
++@item Displacement Operand: m
++16 bits.
++
++@item Displacement Operand: l
++24 bits.
++
+ @end table
+ 
+ For example:
+diff -r 9f04cee4c103 gas/doc/c-mips.texi
+--- a/gas/doc/c-mips.texi	Wed Jun 12 01:54:49 2013 -0400
++++ b/gas/doc/c-mips.texi	Wed Jun 19 13:08:01 2013 -0400
+@@ -234,7 +234,7 @@
+ instructions around accesses to the @samp{HI} and @samp{LO} registers.
+ @samp{-no-m4650} turns off this option.
+ 
+-@itemx -m3900
++@item -m3900
+ @itemx -no-m3900
+ @itemx -m4100
+ @itemx -no-m4100
+diff -r 9f04cee4c103 gas/doc/c-score.texi
+--- a/gas/doc/c-score.texi	Wed Jun 12 01:54:49 2013 -0400
++++ b/gas/doc/c-score.texi	Wed Jun 19 13:08:01 2013 -0400
+@@ -37,7 +37,7 @@
+ @item -EB
+ Assemble code for a big-endian cpu
+ 
+-@itemx -EL
++@item -EL
+ Assemble code for a little-endian cpu
+ 
+ @item -FIXDD 
+@@ -49,13 +49,13 @@
+ @item -SCORE5
+ Assemble code for target is SCORE5
+ 
+-@itemx -SCORE5U
++@item -SCORE5U
+ Assemble code for target is SCORE5U
+ 
+-@itemx -SCORE7
++@item -SCORE7
+ Assemble code for target is SCORE7, this is default setting
+ 
+-@itemx -SCORE3
++@item -SCORE3
+ Assemble code for target is SCORE3
+ 
+ @item -march=score7
+diff -r 9f04cee4c103 gas/doc/c-tic54x.texi
+--- a/gas/doc/c-tic54x.texi	Wed Jun 12 01:54:49 2013 -0400
++++ b/gas/doc/c-tic54x.texi	Wed Jun 19 13:08:01 2013 -0400
+@@ -1,4 +1,4 @@
+-@c Copyright 2000, 2002, 2003, 2006, 2011 Free Software Foundation, Inc.
++@c Copyright 2000-2013 Free Software Foundation, Inc.
+ @c This is part of the GAS manual.
+ @c For copying conditions, see the file as.texinfo.
+ @c TI TMS320C54X description by Timothy Wall, twall@cygnus.com
+@@ -109,7 +109,7 @@
+ is replaced with x.  At this point, x has already been encountered
+ and the substitution stops.
+ 
+-@smallexample @code
++@smallexample
+  .asg   "x",SYM1 
+  .asg   "SYM1",SYM2
+  .asg   "SYM2",x
+@@ -126,14 +126,14 @@
+ ambiguous by placing colons on either side of the subsym.  The following
+ code: 
+ 
+-@smallexample @code
++@smallexample
+  .eval  "10",x
+ LAB:X:  add     #x, a
+ @end smallexample
+ 
+ When assembled becomes:
+ 
+-@smallexample @code
++@smallexample
+ LAB10  add     #10, a
+ @end smallexample
+ 
+@@ -309,7 +309,7 @@
+ of a label or address.  For example, if an address @code{_label} resides
+ in extended program memory, the value of @code{_label} may be loaded as
+ follows:
+-@smallexample @code
++@smallexample
+  ldx     #_label,16,a    ; loads extended bits of _label
+  or      #_label,a       ; loads lower 16 bits of _label
+  bacc    a               ; full address is in accumulator A
+@@ -345,7 +345,7 @@
+ performed on @var{string} before assignment.
+ 
+ @cindex @code{eval} directive, TIC54X
+-@itemx .eval @var{string}, @var{name}
++@item .eval @var{string}, @var{name}
+ Evaluate the contents of string @var{string} and assign the result as a
+ string to the subsym @var{name}.  String replacement is performed on
+ @var{string} before assignment. 
+diff -r 9f04cee4c103 ld/ld.texinfo
+--- a/ld/ld.texinfo	Wed Jun 12 01:54:49 2013 -0400
++++ b/ld/ld.texinfo	Wed Jun 19 13:08:01 2013 -0400
+@@ -139,15 +139,15 @@
+ @ifset I960
+ * i960::                        ld and the Intel 960 family
+ @end ifset
++@ifset M68HC11
++* M68HC11/68HC12::              ld and the Motorola 68HC11 and 68HC12 families
++@end ifset
+ @ifset ARM
+ * ARM::				ld and the ARM family
+ @end ifset
+ @ifset HPPA
+ * HPPA ELF32::                  ld and HPPA 32-bit ELF
+ @end ifset
+-@ifset M68HC11
+-* M68HC11/68HC12::              ld and the Motorola 68HC11 and 68HC12 families
+-@end ifset
+ @ifset M68K
+ * M68K::                        ld and Motorola 68K family
+ @end ifset
+@@ -5998,6 +5998,9 @@
+ @ifset I960
+ * i960::                        @command{ld} and the Intel 960 family
+ @end ifset
++@ifset M68HC11
++* M68HC11/68HC12::             @code{ld} and the Motorola 68HC11 and 68HC12 families
++@end ifset
+ @ifset ARM
+ * ARM::				@command{ld} and the ARM family
+ @end ifset
+@@ -6013,9 +6016,6 @@
+ @ifset MSP430
+ * MSP430::			@command{ld} and MSP430
+ @end ifset
+-@ifset M68HC11
+-* M68HC11/68HC12::		@code{ld} and the Motorola 68HC11 and 68HC12 families
+-@end ifset
+ @ifset POWERPC
+ * PowerPC ELF32::		@command{ld} and PowerPC 32-bit ELF Support
+ @end ifset
+@@ -7863,7 +7863,7 @@
+ @printindex cp
+ 
+ @tex
+-% I think something like @colophon should be in texinfo.  In the
++% I think something like @@colophon should be in texinfo.  In the
+ % meantime:
+ \long\def\colophon{\hbox to0pt{}\vfill
+ \centerline{The body of this manual is set in}
+@@ -7874,7 +7874,7 @@
+ \centerline{{\sl\fontname\tensl\/}}
+ \centerline{are used for emphasis.}\vfill}
+ \page\colophon
+-% Blame: doc@cygnus.com, 28mar91.
++% Blame: doc@@cygnus.com, 28mar91.
+ @end tex
+ 
+ @bye
