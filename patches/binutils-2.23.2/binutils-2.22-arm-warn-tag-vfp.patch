@@ -1,0 +1,27 @@
+diff -rNup binutils-2.20.51.0.7/ChangeLog.stm binutils-2.20.51.0.7.patched/ChangeLog.stm
+--- binutils-2.20.51.0.7/ChangeLog.stm	2012-01-25 17:48:42.000000000 +0100
++++ binutils-2.20.51.0.7.patched/ChangeLog.stm	2012-01-25 18:05:03.000000000 +0100
+@@ -0,0 +1,6 @@
++2012-01-25  Christophe Lyon  <christophe.lyon@st.com>
++
++	bfd/
++	* elf32-arm.c (elf32_arm_merge_eabi_attributes): More explicit
++	warning message when Tag_ABI_HardFP_use is set and Tag_VFP_arch is
++	not.
+diff -rNup binutils-2.20.51.0.7/bfd/elf32-arm.c binutils-2.20.51.0.7.patched/bfd/elf32-arm.c
+--- binutils-2.20.51.0.7/bfd/elf32-arm.c	2012-01-25 17:48:42.000000000 +0100
++++ binutils-2.20.51.0.7.patched/bfd/elf32-arm.c	2012-01-25 18:05:03.000000000 +0100
+@@ -10788,7 +10788,12 @@ elf32_arm_merge_eabi_attributes (bfd *ib
+ 		 nothing.  */
+ 	      else if (in_attr[i].i == 0)
+ 		{
+-		  BFD_ASSERT (in_attr[Tag_ABI_HardFP_use].i == 0);
++		  if (in_attr[Tag_ABI_HardFP_use].i != 0)
++		  {
++		    _bfd_error_handler
++		      (_("warning: %B has no Tag_VFP_arch but sets Tag_ABI_HardFP_use"),
++		       ibfd);
++		  }
+ 		  break;
+ 		}
+ 

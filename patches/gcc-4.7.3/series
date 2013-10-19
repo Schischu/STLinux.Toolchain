@@ -1,0 +1,12 @@
+# SH4 common
+gcc-4.7.3-stm-130807.patch
+gcc-4.7.0-sh-use-gnu-hash-style.patch
+gcc-4.2.4-multilibpath.patch
+gcc-4.5.2-sysroot.patch
+
+
+
+gcc-4.7.3-stack-protect-strong.patch
+
+0500-Fix-Argument-list-too-long-error.patch
+

@@ -33,7 +33,9 @@ GLIBC_DIR	:= $(BUILDDIR_DEBUG)/$(GLIBC)
 GLIBC_BUILDDIR	:= $(BUILDDIR)/$(GLIBC)-build
 
 GLIBC_URL	:= \
-	http://www.duckbox.de/ptxdist/temporary-src/glibc/$(GLIBC).$(GLIBC_SUFFIX)
+	$(call ptx/mirror, GNU, glibc/$(GLIBC).$(GLIBC_SUFFIX)) \
+	http://www.duckbox.de/ptxdist/temporary-src/glibc/$(GLIBC).$(GLIBC_SUFFIX) \
+	http://ptxdist.sat-universum.de/$(GLIBC).$(GLIBC_SUFFIX)
 
 # ----------------------------------------------------------------------------
 # Get

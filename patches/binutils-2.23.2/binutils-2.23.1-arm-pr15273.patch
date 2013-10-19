@@ -1,0 +1,22 @@
+ 2013-03-14  Nick Clifton  <nickc@redhat.com>
+
+	PR gas/15273
+	* config/tc-arm.c (do_co_reg): Do not call check_obsolete with a
+	NULL message, instead just check ARM_CPU_IS_ANY directly.
+
+===================================================================
+RCS file: /cvs/src/src/gas/config/tc-arm.c,v
+retrieving revision 1.557
+retrieving revision 1.558
+diff -u -r1.557 -r1.558
+--- src/gas/config/tc-arm.c	2013/03/11 11:09:30	1.557
++++ src/gas/config/tc-arm.c	2013/03/14 10:23:13	1.558
+@@ -7828,7 +7828,7 @@
+ 	    && inst.operands[4].reg == r->crm
+ 	    && inst.operands[5].imm == r->opc2)
+ 	  {
+-	    if (!check_obsolete (&r->obsoleted, r->obs_msg)
++	    if (! ARM_CPU_IS_ANY (cpu_variant)
+ 	        && warn_on_deprecated
+ 		&& ARM_CPU_HAS_FEATURE (cpu_variant, r->deprecated))
+ 	      as_warn ("%s", r->dep_msg);

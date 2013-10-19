@@ -8,7 +8,8 @@ selected_ptxconfig
 platform-*
 ptxconfigs/*.old
 ptxconfigs/*/*.old
-
+.directory
+*.quilt
 *.orig
 *.swp
 *~

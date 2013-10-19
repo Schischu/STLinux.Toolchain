@@ -25,7 +25,9 @@ CROSS_BINUTILS_DIR	:= $(CROSS_BUILDDIR)/$(CROSS_BINUTILS)
 CROSS_BINUTILS_BUILDDIR	:= $(CROSS_BUILDDIR)/$(CROSS_BINUTILS)-build
 
 CROSS_BINUTILS_URL	:= \
-	http://www.duckbox.de/ptxdist/temporary-src/binutils/$(CROSS_BINUTILS).$(CROSS_BINUTILS_SUFFIX)
+	$(call ptx/mirror, GNU, gcc/$(CROSS_BINUTILS)/$(CROSS_BINUTILS).$(CROSS_BINUTILS_SUFFIX)) \
+	http://www.duckbox.de/ptxdist/temporary-src/binutils/$(CROSS_BINUTILS).$(CROSS_BINUTILS_SUFFIX) \
+	http://ptxdist.sat-universum.de/$(CROSS_BINUTILS).$(CROSS_BINUTILS_SUFFIX)
 
 # ----------------------------------------------------------------------------
 # Get
